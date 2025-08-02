@@ -1,41 +1,45 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, UserPlus, Search, DollarSign, TrendingUp } from "lucide-react";
+import { ArrowLeft, ArrowRight, UserPlus, Search, DollarSign, TrendingUp, FileText, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HowItWorks = () => {
+  const { language, t } = useLanguage();
+  const isRtl = language === 'ar';
+  
   const borrowerSteps = [
     {
-      icon: UserPlus,
-      title: "إنشاء حساب",
-      description: "سجل حسابك وأكمل عملية التحقق"
+      icon: FileText,
+      title: t('howItWorks.step1Borrower'),
+      description: t('howItWorks.step1BorrowerDesc')
     },
     {
-      icon: Search,
-      title: "طلب قرض",
-      description: "حدد المبلغ والغرض ومدة السداد"
+      icon: CheckCircle,
+      title: t('howItWorks.step2Borrower'),
+      description: t('howItWorks.step2BorrowerDesc')
     },
     {
       icon: DollarSign,
-      title: "احصل على التمويل",
-      description: "تلقَ الأموال بعد الموافقة"
+      title: t('howItWorks.step3Borrower'),
+      description: t('howItWorks.step3BorrowerDesc')
     }
   ];
 
   const lenderSteps = [
     {
       icon: UserPlus,
-      title: "إنشاء حساب",
-      description: "سجل كمستثمر وأودع أموالك"
+      title: t('howItWorks.step1Investor'),
+      description: t('howItWorks.step1InvestorDesc')
     },
     {
       icon: Search,
-      title: "اختر الاستثمار",
-      description: "تصفح الفرص المتاحة واختر الأنسب"
+      title: t('howItWorks.step2Investor'),
+      description: t('howItWorks.step2InvestorDesc')
     },
     {
       icon: TrendingUp,
-      title: "اجن العوائد",
-      description: "تابع استثماراتك واحصل على العوائد"
+      title: t('howItWorks.step3Investor'),
+      description: t('howItWorks.step3InvestorDesc')
     }
   ];
 
@@ -44,10 +48,10 @@ const HowItWorks = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            كيف يعمل <span className="text-gold">قرشين؟</span>
+            {t('howItWorks.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            عملية بسيطة وآمنة للحصول على التمويل أو الاستثمار
+            {t('howItWorks.subtitle')}
           </p>
         </div>
 
@@ -55,8 +59,8 @@ const HowItWorks = () => {
           {/* For Borrowers */}
           <div className="space-y-8">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-foreground mb-4">للمقترضين</h3>
-              <p className="text-muted-foreground">احصل على التمويل الذي تحتاجه بسهولة</p>
+              <h3 className="text-2xl font-bold text-foreground mb-4">{t('howItWorks.forBorrowers')}</h3>
+              <p className="text-muted-foreground">{language === 'ar' ? 'احصل على التمويل الذي تحتاجه بسهولة' : 'Get the funding you need easily'}</p>
             </div>
             
             <div className="space-y-6">
@@ -67,30 +71,34 @@ const HowItWorks = () => {
                       {index + 1}
                     </div>
                   </div>
-                  <Card className="flex-1 p-4 border-border/50">
-                    <div className="flex items-start gap-3">
-                      <step.icon className="h-6 w-6 text-gold mt-1" />
-                      <div className="text-right">
-                        <h4 className="font-semibold text-foreground mb-1">{step.title}</h4>
-                        <p className="text-muted-foreground text-sm">{step.description}</p>
+                    <Card className="flex-1 p-4 border-border/50">
+                      <div className="flex items-start gap-3">
+                        <step.icon className="h-6 w-6 text-gold mt-1" />
+                        <div className={isRtl ? 'text-right' : 'text-left'}>
+                          <h4 className="font-semibold text-foreground mb-1">{step.title}</h4>
+                          <p className="text-muted-foreground text-sm">{step.description}</p>
+                        </div>
                       </div>
-                    </div>
-                  </Card>
+                    </Card>
                 </div>
               ))}
             </div>
             
             <Button variant="golden" className="w-full">
-              طلب قرض الآن
-              <ArrowLeft className="mr-2 h-4 w-4 rotate-180" />
+              {language === 'ar' ? 'طلب قرض الآن' : 'Request Loan Now'}
+              {isRtl ? (
+                <ArrowLeft className="mr-2 h-4 w-4 rotate-180" />
+              ) : (
+                <ArrowRight className="ml-2 h-4 w-4" />
+              )}
             </Button>
           </div>
 
           {/* For Lenders */}
           <div className="space-y-8">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-foreground mb-4">للمستثمرين</h3>
-              <p className="text-muted-foreground">استثمر أموالك واحصل على عوائد مجزية</p>
+              <h3 className="text-2xl font-bold text-foreground mb-4">{t('howItWorks.forInvestors')}</h3>
+              <p className="text-muted-foreground">{language === 'ar' ? 'استثمر أموالك واحصل على عوائد مجزية' : 'Invest your money and get attractive returns'}</p>
             </div>
             
             <div className="space-y-6">
@@ -101,22 +109,26 @@ const HowItWorks = () => {
                       {index + 1}
                     </div>
                   </div>
-                  <Card className="flex-1 p-4 border-border/50">
-                    <div className="flex items-start gap-3">
-                      <step.icon className="h-6 w-6 text-gold mt-1" />
-                      <div className="text-right">
-                        <h4 className="font-semibold text-foreground mb-1">{step.title}</h4>
-                        <p className="text-muted-foreground text-sm">{step.description}</p>
+                    <Card className="flex-1 p-4 border-border/50">
+                      <div className="flex items-start gap-3">
+                        <step.icon className="h-6 w-6 text-gold mt-1" />
+                        <div className={isRtl ? 'text-right' : 'text-left'}>
+                          <h4 className="font-semibold text-foreground mb-1">{step.title}</h4>
+                          <p className="text-muted-foreground text-sm">{step.description}</p>
+                        </div>
                       </div>
-                    </div>
-                  </Card>
+                    </Card>
                 </div>
               ))}
             </div>
             
             <Button variant="outline" className="w-full">
-              ابدأ الاستثمار
-              <ArrowLeft className="mr-2 h-4 w-4 rotate-180" />
+              {language === 'ar' ? 'ابدأ الاستثمار' : 'Start Investing'}
+              {isRtl ? (
+                <ArrowLeft className="mr-2 h-4 w-4 rotate-180" />
+              ) : (
+                <ArrowRight className="ml-2 h-4 w-4" />
+              )}
             </Button>
           </div>
         </div>

@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, TrendingUp, Shield, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, TrendingUp, Shield, Users } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { language, t } = useLanguage();
+  const isRtl = language === 'ar';
+  
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-background via-cream to-background overflow-hidden">
       {/* Decorative Elements */}
@@ -12,24 +16,28 @@ const Hero = () => {
           {/* Content */}
           <div className="space-y-8 animate-fade-in">
             <div className="space-y-4">
-              <h1 className="text-5xl lg:text-7xl font-bold text-foreground leading-tight">
-                منصة الإقراض
+              <h1 className={`text-5xl lg:text-7xl font-bold text-foreground leading-tight ${!isRtl ? 'text-left' : ''}`}>
+                {t('hero.title1')}
                 <span className="block bg-gradient-to-r from-gold to-gold-light bg-clip-text text-transparent">
-                  الند للند
+                  {t('hero.title2')}
                 </span>
               </h1>
-              <p className="text-xl text-muted-foreground max-w-xl leading-relaxed">
-                اربط المستثمرين مع المقترضين في بيئة آمنة وشفافة. احصل على التمويل الذي تحتاجه أو استثمر أموالك بعوائد مجزية.
+              <p className={`text-xl text-muted-foreground max-w-xl leading-relaxed ${!isRtl ? 'text-left' : ''}`}>
+                {t('hero.subtitle')}
               </p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Button variant="golden" size="lg" className="group">
-                ابدأ الإقراض
-                <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform rotate-180" />
+                {t('hero.startLending')}
+                {isRtl ? (
+                  <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform rotate-180" />
+                ) : (
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                )}
               </Button>
               <Button variant="outline" size="lg">
-                طلب قرض
+                {t('hero.requestLoan')}
               </Button>
             </div>
             
@@ -37,15 +45,15 @@ const Hero = () => {
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border/20">
               <div className="text-center">
                 <div className="text-2xl font-bold text-gold">+1M</div>
-                <div className="text-sm text-muted-foreground">مستخدم نشط</div>
+                <div className="text-sm text-muted-foreground">{t('hero.activeUsers')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-gold">95%</div>
-                <div className="text-sm text-muted-foreground">معدل السداد</div>
+                <div className="text-sm text-muted-foreground">{t('hero.repaymentRate')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-gold">12%</div>
-                <div className="text-sm text-muted-foreground">عائد متوسط</div>
+                <div className="text-sm text-muted-foreground">{t('hero.averageReturn')}</div>
               </div>
             </div>
           </div>
@@ -62,9 +70,9 @@ const Hero = () => {
                     <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center">
                       <TrendingUp className="h-6 w-6 text-primary-foreground" />
                     </div>
-                    <div className="text-right">
-                      <h3 className="font-semibold text-foreground">عوائد مرتفعة</h3>
-                      <p className="text-sm text-muted-foreground">استثمر بذكاء واحصل على عوائد تنافسية</p>
+                    <div className={isRtl ? 'text-right' : 'text-left'}>
+                      <h3 className="font-semibold text-foreground">{t('hero.highReturns')}</h3>
+                      <p className="text-sm text-muted-foreground">{t('hero.highReturnsDesc')}</p>
                     </div>
                   </div>
                 </div>
@@ -74,9 +82,9 @@ const Hero = () => {
                     <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center">
                       <Shield className="h-6 w-6 text-primary-foreground" />
                     </div>
-                    <div className="text-right">
-                      <h3 className="font-semibold text-foreground">أمان عالي</h3>
-                      <p className="text-sm text-muted-foreground">حماية متطورة لأموالك ومعلوماتك</p>
+                    <div className={isRtl ? 'text-right' : 'text-left'}>
+                      <h3 className="font-semibold text-foreground">{t('hero.highSecurity')}</h3>
+                      <p className="text-sm text-muted-foreground">{t('hero.highSecurityDesc')}</p>
                     </div>
                   </div>
                 </div>
@@ -86,9 +94,9 @@ const Hero = () => {
                     <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center">
                       <Users className="h-6 w-6 text-primary-foreground" />
                     </div>
-                    <div className="text-right">
-                      <h3 className="font-semibold text-foreground">مجتمع موثوق</h3>
-                      <p className="text-sm text-muted-foreground">انضم إلى آلاف المستخدمين الموثوقين</p>
+                    <div className={isRtl ? 'text-right' : 'text-left'}>
+                      <h3 className="font-semibold text-foreground">{t('hero.trustedCommunity')}</h3>
+                      <p className="text-sm text-muted-foreground">{t('hero.trustedCommunityDesc')}</p>
                     </div>
                   </div>
                 </div>

@@ -1,37 +1,40 @@
 import { Card } from "@/components/ui/card";
 import { Shield, TrendingUp, Clock, Users, CreditCard, FileText } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Features = () => {
+  const { t } = useLanguage();
+  
   const features = [
     {
       icon: Shield,
-      title: "أمان متقدم",
-      description: "تشفير من الدرجة المصرفية وحماية شاملة للبيانات"
+      title: t('features.security'),
+      description: t('features.securityDesc')
     },
     {
       icon: TrendingUp,
-      title: "عوائد مجزية",
-      description: "احصل على عوائد تنافسية تصل إلى 15% سنوياً"
+      title: t('features.returns'),
+      description: t('features.returnsDesc')
     },
     {
       icon: Clock,
-      title: "معالجة سريعة",
-      description: "موافقة فورية وتحويل خلال 24 ساعة"
+      title: t('features.processing'),
+      description: t('features.processingDesc')
     },
     {
       icon: Users,
-      title: "تقييم شامل",
-      description: "نظام تقييم ائتماني متطور لضمان الجودة"
+      title: t('features.assessment'),
+      description: t('features.assessmentDesc')
     },
     {
       icon: CreditCard,
-      title: "مرونة في السداد",
-      description: "خطط سداد مرنة تناسب احتياجاتك"
+      title: t('features.flexibility'),
+      description: t('features.flexibilityDesc')
     },
     {
       icon: FileText,
-      title: "شفافية كاملة",
-      description: "تتبع كامل لجميع المعاملات والاستثمارات"
+      title: t('features.transparency'),
+      description: t('features.transparencyDesc')
     }
   ];
 
@@ -40,10 +43,10 @@ const Features = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            لماذا تختار <span className="text-gold">قرشين؟</span>
+            {t('features.title')} <span className="text-gold">قرشين؟</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            نقدم أفضل تجربة إقراض واستثمار مع ضمانات الأمان والشفافية
+            {t('features.subtitle')}
           </p>
         </div>
         
