@@ -70,7 +70,7 @@ const HowItWorks = () => {
                   <Card className="flex-1 p-4 border-border/50">
                     <div className="flex items-start gap-3">
                       <step.icon className="h-6 w-6 text-gold mt-1" />
-                      <div>
+                      <div className="text-right">
                         <h4 className="font-semibold text-foreground mb-1">{step.title}</h4>
                         <p className="text-muted-foreground text-sm">{step.description}</p>
                       </div>
@@ -82,7 +82,7 @@ const HowItWorks = () => {
             
             <Button variant="golden" className="w-full">
               طلب قرض الآن
-              <ArrowLeft className="ml-2 h-4 w-4" />
+              <ArrowLeft className="mr-2 h-4 w-4 rotate-180" />
             </Button>
           </div>
 
@@ -104,7 +104,7 @@ const HowItWorks = () => {
                   <Card className="flex-1 p-4 border-border/50">
                     <div className="flex items-start gap-3">
                       <step.icon className="h-6 w-6 text-gold mt-1" />
-                      <div>
+                      <div className="text-right">
                         <h4 className="font-semibold text-foreground mb-1">{step.title}</h4>
                         <p className="text-muted-foreground text-sm">{step.description}</p>
                       </div>
@@ -116,7 +116,7 @@ const HowItWorks = () => {
             
             <Button variant="outline" className="w-full">
               ابدأ الاستثمار
-              <ArrowLeft className="ml-2 h-4 w-4" />
+              <ArrowLeft className="mr-2 h-4 w-4 rotate-180" />
             </Button>
           </div>
         </div>

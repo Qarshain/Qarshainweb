@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 space-x-reverse">
               <img 
                 src="/lovable-uploads/77a5bec9-d868-4103-b96b-c932ab5016f5.png" 
                 alt="Logo" 
@@ -54,7 +54,7 @@ const Footer = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center text-background/80">
           <p>&copy; 2024 قرشين. جميع الحقوق محفوظة.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex space-x-6 space-x-reverse mt-4 md:mt-0">
             <a href="#" className="hover:text-gold-light transition-colors">الشروط والأحكام</a>
             <a href="#" className="hover:text-gold-light transition-colors">سياسة الخصوصية</a>
             <a href="#" className="hover:text-gold-light transition-colors">ملفات تعريف الارتباط</a>

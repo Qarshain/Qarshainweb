@@ -26,7 +26,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button variant="golden" size="lg" className="group">
                 ابدأ الإقراض
-                <ArrowLeft className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform rotate-180" />
               </Button>
               <Button variant="outline" size="lg">
                 طلب قرض
@@ -62,7 +62,7 @@ const Hero = () => {
                     <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center">
                       <TrendingUp className="h-6 w-6 text-primary-foreground" />
                     </div>
-                    <div>
+                    <div className="text-right">
                       <h3 className="font-semibold text-foreground">عوائد مرتفعة</h3>
                       <p className="text-sm text-muted-foreground">استثمر بذكاء واحصل على عوائد تنافسية</p>
                     </div>
@@ -74,7 +74,7 @@ const Hero = () => {
                     <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center">
                       <Shield className="h-6 w-6 text-primary-foreground" />
                     </div>
-                    <div>
+                    <div className="text-right">
                       <h3 className="font-semibold text-foreground">أمان عالي</h3>
                       <p className="text-sm text-muted-foreground">حماية متطورة لأموالك ومعلوماتك</p>
                     </div>
@@ -86,7 +86,7 @@ const Hero = () => {
                     <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center">
                       <Users className="h-6 w-6 text-primary-foreground" />
                     </div>
-                    <div>
+                    <div className="text-right">
                       <h3 className="font-semibold text-foreground">مجتمع موثوق</h3>
                       <p className="text-sm text-muted-foreground">انضم إلى آلاف المستخدمين الموثوقين</p>
                     </div>
