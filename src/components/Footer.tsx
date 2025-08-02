@@ -12,7 +12,7 @@ const Footer = () => {
                 alt="Logo" 
                 className="h-10 w-10 object-contain"
               />
-              <span className="text-xl font-bold">فوشين</span>
+              <span className="text-xl font-bold">قرشين</span>
             </div>
             <p className="text-background/80 leading-relaxed">
               منصة الإقراض الند للند الرائدة في المنطقة. نربط المستثمرين مع المقترضين في بيئة آمنة وشفافة.
@@ -53,7 +53,7 @@ const Footer = () => {
         <Separator className="bg-background/20 mb-8" />
         
         <div className="flex flex-col md:flex-row justify-between items-center text-background/80">
-          <p>&copy; 2024 فوشين. جميع الحقوق محفوظة.</p>
+          <p>&copy; 2024 قرشين. جميع الحقوق محفوظة.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-gold-light transition-colors">الشروط والأحكام</a>
             <a href="#" className="hover:text-gold-light transition-colors">سياسة الخصوصية</a>

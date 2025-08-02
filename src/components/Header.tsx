@@ -10,7 +10,7 @@ const Header = () => {
             alt="Logo" 
             className="h-10 w-10 object-contain"
           />
-          <span className="text-xl font-bold text-foreground">فوشين</span>
+          <span className="text-xl font-bold text-foreground">قرشين</span>
         </div>
         
         <nav className="hidden md:flex items-center space-x-8">
