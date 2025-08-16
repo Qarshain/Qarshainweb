@@ -1,10 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, TrendingUp, Shield, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, TrendingUp, Shield, Users, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const { language, t } = useLanguage();
+  const { user, userType } = useAuth();
   const isRtl = language === 'ar';
+  const navigate = useNavigate();
+  
+  const handleStartLending = () => {
+    navigate('/invest');
+  };
   
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-background via-cream to-background overflow-hidden">
@@ -22,40 +30,28 @@ const Hero = () => {
                   {t('hero.title2')}
                 </span>
               </h1>
+              
+
               <p className={`text-xl text-muted-foreground max-w-xl leading-relaxed ${!isRtl ? 'text-left' : ''}`}>
                 {t('hero.subtitle')}
               </p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="golden" size="lg" className="group">
+              <Button variant="golden" size="lg" className="group" onClick={handleStartLending}>
                 {t('hero.startLending')}
                 {isRtl ? (
                   <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform rotate-180" />
                 ) : (
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:-translate-x-1 transition-transform" />
                 )}
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={() => navigate('/loan-request')}>
                 {t('hero.requestLoan')}
               </Button>
             </div>
             
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border/20">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-gold">+1M</div>
-                <div className="text-sm text-muted-foreground">{t('hero.activeUsers')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-gold">95%</div>
-                <div className="text-sm text-muted-foreground">{t('hero.repaymentRate')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-gold">12%</div>
-                <div className="text-sm text-muted-foreground">{t('hero.averageReturn')}</div>
-              </div>
-            </div>
+            {/* Stats section removed */}
           </div>
           
           {/* Visual Elements */}

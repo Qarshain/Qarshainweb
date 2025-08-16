@@ -6,7 +6,7 @@ const Footer = () => {
   const isRtl = language === 'ar';
   
   return (
-    <footer className="bg-foreground text-background py-16">
+    <footer id="contact" className="bg-foreground text-background py-16">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="space-y-4">
@@ -24,12 +24,12 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4 text-gold">{t('footer.services')}</h3>
+            <h3 className="font-semibold mb-4 text-gold">{isRtl ? 'روابط سريعة' : 'Quick Links'}</h3>
             <ul className="space-y-2 text-background/80">
-              <li><a href="#" className="hover:text-gold-light transition-colors">{t('footer.personalLoans')}</a></li>
-              <li><a href="#" className="hover:text-gold-light transition-colors">{t('footer.businessLoans')}</a></li>
-              <li><a href="#" className="hover:text-gold-light transition-colors">{t('footer.investment')}</a></li>
-              <li><a href="#" className="hover:text-gold-light transition-colors">{t('footer.portfolioManagement')}</a></li>
+              <li><a href="#features" className="hover:text-gold-light transition-colors">{isRtl ? 'المميزات' : 'Features'}</a></li>
+              <li><a href="#strategic-opportunities" className="hover:text-gold-light transition-colors">{isRtl ? 'الفرص الاستثمارية' : 'Investment Opportunities'}</a></li>
+              <li><a href="#how-it-works" className="hover:text-gold-light transition-colors">{isRtl ? 'كيف يعمل' : 'How It Works'}</a></li>
+              <li><a href="/invest" className="hover:text-gold-light transition-colors">{isRtl ? 'استثمر الآن' : 'Invest Now'}</a></li>
             </ul>
           </div>
           

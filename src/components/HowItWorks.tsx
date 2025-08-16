@@ -2,10 +2,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, UserPlus, Search, DollarSign, TrendingUp, FileText, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 const HowItWorks = () => {
   const { language, t } = useLanguage();
   const isRtl = language === 'ar';
+  const navigate = useNavigate();
   
   const borrowerSteps = [
     {
@@ -60,7 +62,7 @@ const HowItWorks = () => {
           <div className="space-y-8">
             <div className="text-center">
               <h3 className="text-2xl font-bold text-foreground mb-4">{t('howItWorks.forBorrowers')}</h3>
-              <p className="text-muted-foreground">{language === 'ar' ? 'احصل على التمويل الذي تحتاجه بسهولة' : 'Get the funding you need easily'}</p>
+              <p className="text-muted-foreground">{language === 'ar' ? 'توقف عن القلق بشأن موافقات القروض. احصل على المال في أيام — بدون رفض.' : 'Stop stressing over loan approvals. Get money in days — without rejections.'}</p>
             </div>
             
             <div className="space-y-6">
@@ -84,7 +86,7 @@ const HowItWorks = () => {
               ))}
             </div>
             
-            <Button variant="golden" className="w-full">
+            <Button variant="golden" className="w-full" onClick={() => navigate('/loan-request')}>
               {language === 'ar' ? 'طلب قرض الآن' : 'Request Loan Now'}
               {isRtl ? (
                 <ArrowLeft className="mr-2 h-4 w-4 rotate-180" />
@@ -98,7 +100,7 @@ const HowItWorks = () => {
           <div className="space-y-8">
             <div className="text-center">
               <h3 className="text-2xl font-bold text-foreground mb-4">{t('howItWorks.forInvestors')}</h3>
-              <p className="text-muted-foreground">{language === 'ar' ? 'استثمر أموالك واحصل على عوائد مجزية' : 'Invest your money and get attractive returns'}</p>
+              <p className="text-muted-foreground">{language === 'ar' ? 'توقف عن التخمين في أين تستثمر. نمِّ أموالك — بدون التعامل مع وسطاء.' : 'Stop guessing where to invest. Grow your money — without dealing with middlemen.'}</p>
             </div>
             
             <div className="space-y-6">
@@ -122,7 +124,7 @@ const HowItWorks = () => {
               ))}
             </div>
             
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full" onClick={() => navigate('/invest')}>
               {language === 'ar' ? 'ابدأ الاستثمار' : 'Start Investing'}
               {isRtl ? (
                 <ArrowLeft className="mr-2 h-4 w-4 rotate-180" />

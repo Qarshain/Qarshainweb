@@ -6,6 +6,8 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  restoreLanguage: () => void;
+  checkLanguageConsistency: () => void;
 }
 
 const translations = {
@@ -20,7 +22,7 @@ const translations = {
     
     // Hero
     'hero.title1': 'منصة الإقراض',
-    'hero.title2': 'الند للند',
+    'hero.title2': 'النظير للنظير',
     'hero.subtitle': 'اربط المستثمرين مع المقترضين في بيئة آمنة وشفافة. احصل على التمويل الذي تحتاجه أو استثمر أموالك بعوائد مجزية.',
     'hero.startLending': 'ابدأ الإقراض',
     'hero.requestLoan': 'طلب قرض',
@@ -69,7 +71,7 @@ const translations = {
     'howItWorks.step3InvestorDesc': 'راقب نمو استثماراتك واحصل على العوائد',
     
     // Footer
-    'footer.description': 'منصة الإقراض الند للند الرائدة في المنطقة. نربط المستثمرين مع المقترضين في بيئة آمنة وشفافة.',
+    'footer.description': 'منصة الإقراض النظير للنظير الرائدة في المنطقة. نربط المستثمرين مع المقترضين في بيئة آمنة وشفافة.',
     'footer.services': 'الخدمات',
     'footer.personalLoans': 'القروض الشخصية',
     'footer.businessLoans': 'قروض الأعمال',
@@ -174,20 +176,63 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('ar');
+  // Initialize language from localStorage or default to 'ar'
+  const [language, setLanguage] = useState<Language>(() => {
+    const savedLanguage = localStorage.getItem('preferred-language');
+    return (savedLanguage as Language) || 'ar';
+  });
 
   const t = (key: string): string => {
     return translations[language][key] || key;
+  };
+
+  // Update localStorage when language changes
+  const handleLanguageChange = (newLanguage: Language) => {
+    console.log(`🌍 Language changing from ${language} to ${newLanguage}`);
+    setLanguage(newLanguage);
+    localStorage.setItem('preferred-language', newLanguage);
+    console.log(`💾 Language preference saved to localStorage: ${newLanguage}`);
   };
 
   useEffect(() => {
     // Update document direction and language
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
+    console.log(`📄 Document updated: dir=${document.documentElement.dir}, lang=${document.documentElement.lang}`);
   }, [language]);
 
+  // Ensure language is synchronized on app initialization
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('preferred-language');
+    console.log(`🔄 App initialization - Saved language from localStorage: ${savedLanguage}`);
+    if (savedLanguage && savedLanguage !== language) {
+      console.log(`🔄 Restoring language from localStorage: ${savedLanguage}`);
+      setLanguage(savedLanguage as Language);
+    }
+  }, []);
+
+  // Function to restore language from localStorage
+  const restoreLanguage = () => {
+    const savedLanguage = localStorage.getItem('preferred-language');
+    console.log(`🔄 Manual language restore - Saved language: ${savedLanguage}`);
+    if (savedLanguage) {
+      setLanguage(savedLanguage as Language);
+    }
+  };
+
+  // Function to check and fix language consistency issues
+  const checkLanguageConsistency = () => {
+    const savedLanguage = localStorage.getItem('preferred-language');
+    if (savedLanguage && savedLanguage !== language) {
+      console.log(`🔄 Language consistency issue detected. Attempting to fix.`);
+      setLanguage(savedLanguage as Language);
+      localStorage.setItem('preferred-language', savedLanguage);
+      console.log(`💾 Language preference fixed in localStorage: ${savedLanguage}`);
+    }
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: handleLanguageChange, t, restoreLanguage, checkLanguageConsistency }}>
       {children}
     </LanguageContext.Provider>
   );
