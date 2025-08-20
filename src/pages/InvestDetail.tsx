@@ -5,7 +5,7 @@ import { db } from "../lib/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Home, ArrowLeft, Globe, AlertCircle, AlertTriangle } from "lucide-react";
+import { Home, ArrowLeft, Globe, AlertCircle, AlertTriangle, CheckCircle } from "lucide-react";
 import { formatSAR } from "../lib/currency";
 
 const InvestDetail = () => {
@@ -77,13 +77,13 @@ const InvestDetail = () => {
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setKycStatus(userData.kycStatus || 'pending');
+          setKycStatus(userData.kycStatus || 'approved');
         } else {
-          setKycStatus('pending');
+          setKycStatus('approved');
         }
       } catch (error) {
         console.error('Error checking KYC status:', error);
-        setKycStatus('pending');
+        setKycStatus('approved');
       } finally {
         setKycLoading(false);
       }
@@ -119,13 +119,7 @@ const InvestDetail = () => {
       return;
     }
     
-    if (kycStatus && ['pending', 'rejected'].includes(kycStatus)) {
-      setError(kycStatus === 'pending' 
-        ? "Your account is pending verification. Please wait for admin approval."
-        : "Your account has been rejected. Please contact support for assistance."
-      );
-      return;
-    }
+    // KYC status is now auto-approved, so no blocking needed
     
     if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
       setError("Enter a valid amount.");
@@ -289,25 +283,19 @@ const InvestDetail = () => {
         </div>
       )}
       
-      {/* KYC Status Warning */}
-      {user && kycStatus && ['pending', 'rejected'].includes(kycStatus) && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-          <div className="flex items-center gap-2 text-red-800">
-            <AlertCircle className="h-4 w-4" />
+      {/* KYC Status Success */}
+      {user && kycStatus === 'approved' && (
+        <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+          <div className="flex items-center gap-2 text-green-800">
+            <CheckCircle className="h-4 w-4" />
             <span className="text-sm font-medium">
-              {isAr ? 'حسابك غير مفعل' : 'Account Not Verified'}
+              {isAr ? 'حسابك مفعل' : 'Account Verified'}
             </span>
           </div>
-          <p className="text-red-700 text-xs mt-1">
-            {kycStatus === 'pending' 
-              ? (isAr 
-                ? 'حسابك قيد المراجعة. يرجى الانتظار للموافقة قبل الاستثمار.'
-                : 'Your account is under review. Please wait for approval before investing.'
-              )
-              : (isAr 
-                ? 'تم رفض حسابك. يرجى التواصل مع الدعم للمساعدة.'
-                : 'Your account has been rejected. Please contact support for assistance.'
-              )
+          <p className="text-green-700 text-xs mt-1">
+            {isAr 
+              ? '✅ حسابك مفعل ومُوافق عليه! يمكنك الآن الاستثمار.'
+              : '✅ Your account is verified and approved! You can now invest.'
             }
           </p>
         </div>
@@ -318,37 +306,7 @@ const InvestDetail = () => {
       <div className="mb-2">Term: {opportunity.term}</div>
       <div className="mb-2">Risk: {opportunity.risk}</div>
       <form onSubmit={handleInvest} className="mt-6 space-y-4">
-        {kycStatus && ['pending', 'rejected'].includes(kycStatus) ? (
-          <div className="text-center py-8">
-            <div className="text-4xl mb-4">
-              {kycStatus === 'pending' ? '⏳' : '❌'}
-            </div>
-            <h3 className="text-lg font-semibold mb-2 text-red-600">
-              {kycStatus === 'pending' 
-                ? (isAr ? 'حسابك قيد المراجعة' : 'Account Under Review')
-                : (isAr ? 'تم رفض حسابك' : 'Account Rejected')
-              }
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              {kycStatus === 'pending'
-                ? (isAr 
-                  ? 'لا يمكنك الاستثمار حتى يتم مراجعة حسابك من قبل الإدارة.'
-                  : 'You cannot invest until your account is reviewed by administration.'
-                )
-                : (isAr 
-                  ? 'لا يمكنك الاستثمار لأن حسابك تم رفضه. يرجى التواصل مع الدعم.'
-                  : 'You cannot invest because your account was rejected. Please contact support.'
-                )
-              }
-            </p>
-            <Button 
-              onClick={() => navigate('/dashboard')} 
-              variant="outline"
-            >
-              {isAr ? 'العودة إلى لوحة التحكم' : 'Back to Dashboard'}
-            </Button>
-          </div>
-        ) : (
+        {kycStatus === 'approved' ? (
           <>
             <input
               type="number"
@@ -364,6 +322,19 @@ const InvestDetail = () => {
             {success && <div className="text-green-600 text-sm">Investment successful! Redirecting...</div>}
             <button type="submit" className="w-full bg-gold text-white p-2 rounded">Invest</button>
           </>
+        ) : (
+          <div className="text-center py-8">
+            <div className="text-4xl mb-4">⏳</div>
+            <h3 className="text-lg font-semibold mb-2 text-yellow-600">
+              {isAr ? 'جاري تفعيل حسابك' : 'Activating Your Account'}
+            </h3>
+            <p className="text-muted-foreground mb-4">
+              {isAr 
+                ? 'سيتم تفعيل حسابك قريباً. يرجى المحاولة مرة أخرى في بضع دقائق.'
+                : 'Your account will be activated shortly. Please try again in a few minutes.'
+              }
+            </p>
+          </div>
         )}
       </form>
     </div>

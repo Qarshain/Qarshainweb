@@ -83,13 +83,13 @@ export default function LoanRequest() {
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setKycStatus(userData.kycStatus || 'pending');
+          setKycStatus(userData.kycStatus || 'approved');
         } else {
-          setKycStatus('pending');
+          setKycStatus('approved');
         }
       } catch (error) {
         console.error('Error checking KYC status:', error);
-        setKycStatus('pending');
+        setKycStatus('approved');
       } finally {
         setKycLoading(false);
       }
@@ -543,44 +543,6 @@ export default function LoanRequest() {
                     <div className="text-center py-8">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
                       <p className="text-muted-foreground">Checking account status...</p>
-                    </div>
-                  ) : kycStatus === 'pending' ? (
-                    <div className="text-center py-8">
-                      <div className="text-4xl mb-4">⏳</div>
-                      <h3 className="text-lg font-semibold mb-2 text-yellow-600">
-                        {isAr ? 'حسابك قيد المراجعة' : 'Account Under Review'}
-                      </h3>
-                      <p className="text-muted-foreground mb-4">
-                        {isAr 
-                          ? 'حسابك قيد المراجعة من قبل الإدارة. يرجى الانتظار للموافقة قبل إنشاء طلب قرض.'
-                          : 'Your account is under review by administration. Please wait for approval before creating a loan request.'
-                        }
-                      </p>
-                      <Button 
-                        onClick={() => navigate('/dashboard')} 
-                        variant="outline"
-                      >
-                        {isAr ? 'العودة إلى لوحة التحكم' : 'Back to Dashboard'}
-                      </Button>
-                    </div>
-                  ) : kycStatus === 'rejected' ? (
-                    <div className="text-center py-8">
-                      <div className="text-4xl mb-4">❌</div>
-                      <h3 className="text-lg font-semibold mb-2 text-red-600">
-                        {isAr ? 'تم رفض حسابك' : 'Account Rejected'}
-                      </h3>
-                      <p className="text-muted-foreground mb-4">
-                        {isAr 
-                          ? 'تم رفض حسابك من قبل الإدارة. يرجى التواصل مع الدعم للمساعدة.'
-                          : 'Your account has been rejected by administration. Please contact support for assistance.'
-                        }
-                      </p>
-                      <Button 
-                        onClick={() => navigate('/dashboard')} 
-                        variant="outline"
-                      >
-                        {isAr ? 'العودة إلى لوحة التحكم' : 'Back to Dashboard'}
-                      </Button>
                     </div>
                   ) : (
                     /* Show loan form for verified users */

@@ -80,27 +80,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
       
-      // Store complete user data in Firestore with proper KYC status
+      // Store complete user data in Firestore with auto-approved KYC status
       const userData = {
         name,
         email,
         userType,
-        kycStatus: 'pending', // Always start with pending status
+        kycStatus: 'approved', // Auto-approve users to start working immediately
         createdAt: new Date(),
         updatedAt: new Date(),
         mobileNumber: '', // Empty by default
         idNumber: '', // Empty by default
         idPhotoUrl: '', // Empty by default
-        verifiedAt: null, // Not verified yet
-        adminAction: null, // No admin action yet
-        adminId: null, // No admin ID yet
-        adminEmail: null // No admin email yet
+        verifiedAt: new Date(), // Auto-verified
+        adminAction: 'auto_approved', // Auto-approved by system
+        adminId: 'system', // System approval
+        adminEmail: 'system@qarshain.com' // System email
       };
       
       await setDoc(doc(db, "users", cred.user.uid), userData);
       await sendEmailVerification(cred.user);
       
-      console.log("✅ User created successfully with pending KYC status:", userData);
+      console.log("✅ User created successfully with auto-approved KYC status:", userData);
     } catch (err: any) {
       setError(err.message);
       console.error("❌ Error creating user:", err);
@@ -120,25 +120,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const docSnap = await getDoc(docRef);
         
         if (!docSnap.exists()) {
-          // New Google user - create with pending KYC status
+          // New Google user - create with auto-approved KYC status
           const userData = {
             name: result.user.displayName,
             email: result.user.email,
             userType: 'borrower', // Default to borrower for Google users
-            kycStatus: 'pending', // Always start with pending status
+            kycStatus: 'approved', // Auto-approve users to start working immediately
             createdAt: new Date(),
             updatedAt: new Date(),
             mobileNumber: '',
             idNumber: '',
             idPhotoUrl: '',
-            verifiedAt: null,
-            adminAction: null,
-            adminId: null,
-            adminEmail: null
+            verifiedAt: new Date(), // Auto-verified
+            adminAction: 'auto_approved', // Auto-approved by system
+            adminId: 'system', // System approval
+            adminEmail: 'system@qarshain.com' // System email
           };
           
           await setDoc(docRef, userData);
-          console.log("✅ Google user created successfully with pending KYC status:", userData);
+          console.log("✅ Google user created successfully with auto-approved KYC status:", userData);
         } else {
           // Existing user - just update name if needed
           await setDoc(docRef, { 

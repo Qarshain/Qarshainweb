@@ -55,13 +55,13 @@ const Dashboard = () => {
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setKycStatus(userData.kycStatus || 'pending');
+          setKycStatus(userData.kycStatus || 'approved');
         } else {
-          setKycStatus('pending');
+          setKycStatus('approved');
         }
       } catch (error) {
         console.error('Error checking KYC status:', error);
-        setKycStatus('pending');
+        setKycStatus('approved');
       } finally {
         setKycLoading(false);
       }
@@ -338,26 +338,16 @@ const Dashboard = () => {
           </Card>
         )}
 
-        {/* KYC Status Warning */}
-        {user && kycStatus && ['pending', 'rejected'].includes(kycStatus) && (
-          <Card className={`mb-6 ${kycStatus === 'pending' ? 'border-yellow-200 bg-yellow-50' : 'border-red-200 bg-red-50'}`}>
+        {/* KYC Status Success Message */}
+        {user && kycStatus === 'approved' && (
+          <Card className="mb-6 border-green-200 bg-green-50">
             <CardContent className="p-4">
               <div className="flex items-center gap-2">
-                {kycStatus === 'pending' ? (
-                  <Clock className="h-4 w-4 text-yellow-800" />
-                ) : (
-                  <XCircle className="h-4 w-4 text-red-800" />
-                )}
-                <span className={kycStatus === 'pending' ? 'text-yellow-800' : 'text-red-800'}>
-                  {kycStatus === 'pending' 
-                    ? (isAr 
-                      ? 'حسابك قيد المراجعة من قبل الإدارة. يرجى الانتظار للموافقة.'
-                      : 'Your account is under review by administration. Please wait for approval.'
-                    )
-                    : (isAr 
-                      ? 'تم رفض حسابك من قبل الإدارة. يرجى التواصل مع الدعم للمساعدة.'
-                      : 'Your account has been rejected by administration. Please contact support for assistance.'
-                    )
+                <CheckCircle className="h-4 w-4 text-green-800" />
+                <span className="text-green-800">
+                  {isAr 
+                    ? '✅ حسابك مفعل ومُوافق عليه! يمكنك الآن استخدام جميع الميزات.'
+                    : '✅ Your account is active and approved! You can now use all features.'
                   }
                 </span>
               </div>
