@@ -135,13 +135,35 @@ const AdminOpportunities = () => {
       const userList = querySnapshot.docs.map(doc => ({ 
         id: doc.id, 
         ...doc.data() 
-      }));
+      })) as any[];
+      
+      // Auto-approve any pending users to match the new system
+      for (const user of userList) {
+        if (user.kycStatus === 'pending') {
+          try {
+            await updateDoc(doc(db, "users", user.id), {
+              kycStatus: 'approved',
+              verifiedAt: new Date(),
+              adminAction: 'auto_approved',
+              adminId: 'system',
+              adminEmail: 'system@qarshain.com',
+              updatedAt: new Date()
+            });
+            console.log(`✅ Auto-approved user: ${user.name || user.email}`);
+            // Update the user object in the list
+            user.kycStatus = 'approved';
+            user.verifiedAt = new Date();
+          } catch (error) {
+            console.error(`❌ Failed to auto-approve user ${user.id}:`, error);
+          }
+        }
+      }
       
       // Sort users by KYC status priority and creation date
       const sortedUsers = userList.sort((a, b) => {
         const statusPriority = {
-          'pending': 1,    // Highest priority - needs attention
-          'approved': 2,   // Medium priority - already handled
+          'approved': 1,   // Highest priority - active users
+          'pending': 2,    // Medium priority - needs attention (should be rare now)
           'rejected': 3    // Lowest priority - already handled
         };
         
@@ -573,6 +595,9 @@ const AdminOpportunities = () => {
                   <Shield className="h-5 w-5" />
                   User KYC Verification Management
                 </CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  ℹ️ Users are automatically approved upon registration. The system will auto-approve any pending users.
+                </p>
                 </CardHeader>
                 <CardContent>
                 <div className="flex justify-between items-center mb-4">
