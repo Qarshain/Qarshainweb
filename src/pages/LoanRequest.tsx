@@ -311,7 +311,16 @@ export default function LoanRequest() {
   };
 
   // Check if user can submit loan (authenticated and verified)
-  const canSubmitLoan = user && kycStatus === 'verified';
+  const canSubmitLoan = user && (kycStatus === 'approved' || kycStatus === 'verified');
+  
+  // Debug logging
+  console.log('🔍 LoanRequest Debug:', {
+    user: !!user,
+    userEmail: user?.email,
+    kycStatus,
+    canSubmitLoan,
+    loadingData
+  });
 
   return (
     <div className="min-h-screen bg-[var(--garshain-cream)] py-8">
