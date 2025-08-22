@@ -59,7 +59,7 @@ const Header = () => {
               className="h-10 w-10 object-contain transition-transform group-hover:scale-110"
             />
             <span className="text-xl font-bold text-foreground group-hover:text-[hsl(45,85%,55%)] transition-colors">
-              {isRtl ? 'قرشين' : 'Qarshain'}
+              {isRtl ? 'قرشين' : 'Garshain'}
             </span>
           </div>
         </div>

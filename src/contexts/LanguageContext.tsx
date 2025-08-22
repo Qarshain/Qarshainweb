@@ -133,7 +133,7 @@ const translations = {
     'features.transparencyDesc': 'Full tracking of all transactions and investments',
     
     // How It Works
-    'howItWorks.title': 'How Does Qersheen Work?',
+    'howItWorks.title': 'How Does Garshain Work?',
     'howItWorks.subtitle': 'A simple and secure process for everyone',
     'howItWorks.forBorrowers': 'For Borrowers',
     'howItWorks.forInvestors': 'For Investors',
@@ -167,7 +167,7 @@ const translations = {
     'footer.faq': 'FAQ',
     'footer.contactUs': 'Contact Us',
     'footer.privacyPolicy': 'Privacy Policy',
-    'footer.copyright': '© 2024 Qersheen. All rights reserved.',
+    'footer.copyright': '© 2024 Garshain. All rights reserved.',
     'footer.terms': 'Terms & Conditions',
     'footer.cookies': 'Cookies',
   }
