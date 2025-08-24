@@ -1,5 +1,5 @@
-[33md322823[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m Fix: Add 404.html and routing support for GitHub Pages SPA
-[33m42fcc5e[m Add CNAME file for www.qarshain.com custom domain
-[33m1f708d1[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Deploy: Complete Qarshain P2P Lending Platform with Microsoft Clarity integration
-[33med130a0[m Add English version
-[33mb0e0f7d[m Add RTL support
+[33m24ecf7c[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m Update favicon to use Garshain logo and remove old favicon files
+[33md4db17f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Remove expected investor return/profit display from loan summary page
+[33mb5f027d[m Update favicon to use Garshain logo and add PWA manifest support
+[33me075357[m Replace 'Interest Rate' and 'Reward Rate' with 'Expected Return' throughout the website
+[33m8d3d4d3[m Fix expected return calculation in admin dashboard - show correct percentage instead of inflated values

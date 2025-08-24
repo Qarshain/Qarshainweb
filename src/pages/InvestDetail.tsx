@@ -46,7 +46,7 @@ const InvestDetail = () => {
             title: `${data.amount} SAR - ${data.repaymentPeriod} months`,
             description: data.purpose || "Personal loan request",
             amount: data.amount,
-            interestRate: 8 + Math.random() * 4, // Random expected return between 8-12%
+            interestRate: 3 + Math.random() * 5, // Random expected return between 3-8%
             term: `${data.repaymentPeriod} months`,
             risk: data.riskLevel || 'medium',
             borrowerName: data.name || "Anonymous",

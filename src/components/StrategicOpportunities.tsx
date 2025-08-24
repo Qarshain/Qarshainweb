@@ -133,7 +133,7 @@ const StrategicOpportunities = () => {
 
     // 3. Class C (Higher Risk) - Higher potential returns
     const classC = loans
-      .filter(loan => loan.risk === 'high' && loan.interestRate >= 12)
+      .filter(loan => loan.risk === 'high' && loan.interestRate >= 7)
       .sort((a, b) => b.interestRate - a.interestRate);
     
     if (classC.length > 0) {
@@ -161,7 +161,7 @@ const StrategicOpportunities = () => {
       title: isAr ? 'توسعة مشروع تجاري صغير' : 'Small Business Expansion',
       description: isAr ? 'تمويل لتوسعة متجر إلكتروني ناجح مع خطة نمو واضحة' : 'Funding for expanding a successful e-commerce store with a clear growth plan',
       amount: 5000,
-      interestRate: 8.5,
+      interestRate: 5.5,
       term: '12',
       risk: 'low',
       borrowerName: isAr ? 'أحمد محمد' : 'Ahmed Mohammed',
@@ -180,7 +180,7 @@ const StrategicOpportunities = () => {
       title: isAr ? 'تطوير تطبيق تقني' : 'Tech App Development',
       description: isAr ? 'تطوير تطبيق جوال مبتكر مع إمكانات تسويقية عالية' : 'Development of an innovative mobile app with high marketing potential',
       amount: 5000,
-      interestRate: 12.0,
+      interestRate: 7.0,
       term: '18',
       risk: 'medium',
       borrowerName: isAr ? 'سارة أحمد' : 'Sarah Ahmed',
@@ -199,7 +199,7 @@ const StrategicOpportunities = () => {
       title: isAr ? 'مشروع عقاري استثماري' : 'Real Estate Investment',
       description: isAr ? 'شراء وتطوير عقار استثماري في منطقة ناشئة' : 'Purchase and development of investment property in an emerging area',
       amount: 5000,
-      interestRate: 15.5,
+      interestRate: 8.0,
       term: '24',
       risk: 'high',
       borrowerName: isAr ? 'محمد علي' : 'Mohammed Ali',

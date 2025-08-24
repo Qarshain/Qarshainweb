@@ -119,7 +119,7 @@ const SampleDataManager: React.FC = () => {
             <div className="space-y-1 text-sm text-muted-foreground">
               <div>SAR 800 - SAR 5,000</div>
               <div>2 - 12 {isAr ? "أشهر" : "months"}</div>
-              <div>{isAr ? "معدلات ربح 8-12%" : "8-12% expected returns"}</div>
+              <div>{isAr ? "معدلات ربح 3-8%" : "3-8% expected returns"}</div>
             </div>
           </div>
         </div>
