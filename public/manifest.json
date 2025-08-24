@@ -1,0 +1,27 @@
+{
+  "name": "قرشين - Garshain",
+  "short_name": "Garshain",
+  "description": "Islamic P2P Lending Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/lovable-uploads/77a5bec9-d868-4103-b96b-c932ab5016f5.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/77a5bec9-d868-4103-b96b-c932ab5016f5.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business", "lifestyle"],
+  "lang": "ar",
+  "dir": "rtl"
+}
