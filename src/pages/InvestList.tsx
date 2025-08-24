@@ -370,7 +370,7 @@ const InvestList = () => {
                 : `${formatSAR(data.amount, 'en')}, ${data.repaymentPeriod} months`,
               description: data.purpose || "Personal loan request",
               amount: data.amount,
-              interestRate: 6,
+              interestRate: 3 + Math.random() * 5,
               term: `${data.repaymentPeriod} ${isAr ? 'أشهر' : 'months'}`,
               risk: riskLevel,
               borrowerName: data.name || "Anonymous",

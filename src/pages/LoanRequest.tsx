@@ -253,7 +253,7 @@ export default function LoanRequest() {
         submittedAt: serverTimestamp(),
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
-        interestRate: 6, // 6% annual expected return
+        interestRate: 3 + Math.random() * 5, // Random expected return between 3-8%
         monthlyPayment: loanDetails.monthlyPayment,
         totalRepayment: loanDetails.totalRepayment,
         daysRemaining: repaymentPeriod * 30
