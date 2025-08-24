@@ -46,7 +46,7 @@ const InvestDetail = () => {
             title: `${data.amount} SAR - ${data.repaymentPeriod} months`,
             description: data.purpose || "Personal loan request",
             amount: data.amount,
-            interestRate: 3 + Math.random() * 5, // Random expected return between 3-8%
+            interestRate: "3-8", // Expected return range between 3-8%
             term: `${data.repaymentPeriod} months`,
             risk: data.riskLevel || 'medium',
             borrowerName: data.name || "Anonymous",
@@ -136,7 +136,7 @@ const InvestDetail = () => {
         amount: investmentAmount,
         investedAt: new Date(),
         status: 'active',
-        expectedReturn: investmentAmount * (1 + (opportunity.interestRate / 100)),
+        expectedReturn: investmentAmount * (1 + (typeof opportunity.interestRate === 'string' ? 0.055 : opportunity.interestRate / 100)),
         repaymentDate: new Date(Date.now() + (opportunity.term.includes('12') ? 365 : opportunity.term.includes('6') ? 180 : 90) * 24 * 60 * 60 * 1000)
       });
       

@@ -16,7 +16,7 @@ interface Opportunity {
   title: string;
   description: string;
   amount: number;
-  interestRate: number;
+  interestRate: string | number;
   term: string;
   risk: string;
   borrowerName: string;
@@ -370,7 +370,7 @@ const InvestList = () => {
                 : `${formatSAR(data.amount, 'en')}, ${data.repaymentPeriod} months`,
               description: data.purpose || "Personal loan request",
               amount: data.amount,
-              interestRate: 3 + Math.random() * 5,
+              interestRate: "3-8",
               term: `${data.repaymentPeriod} ${isAr ? 'أشهر' : 'months'}`,
               risk: riskLevel,
               borrowerName: data.name || "Anonymous",
@@ -518,7 +518,10 @@ const InvestList = () => {
       case 'amount':
         return b.amount - a.amount;
       case 'interest':
-        return b.interestRate - a.interestRate;
+        // Handle both string and number types for interestRate
+        const aRate = typeof a.interestRate === 'string' ? 5.5 : a.interestRate; // Use middle value for string range
+        const bRate = typeof b.interestRate === 'string' ? 5.5 : b.interestRate;
+        return bRate - aRate;
       case 'risk':
         return a.risk === 'low' ? -1 : a.risk === 'medium' ? 0 : 1;
       case 'days':
@@ -723,7 +726,9 @@ const InvestList = () => {
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <div className="text-muted-foreground">{labels.interestRate}</div>
-                      <div className="font-semibold text-green-600">{opp.interestRate.toFixed(1)}%</div>
+                      <div className="font-semibold text-green-600">
+                        {typeof opp.interestRate === 'string' ? opp.interestRate : opp.interestRate.toFixed(1)}%
+                      </div>
                     </div>
                                           <div>
                         <div className="text-muted-foreground">{labels.daysRemaining}</div>

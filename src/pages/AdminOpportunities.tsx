@@ -708,7 +708,7 @@ const AdminOpportunities = () => {
                                 <span className="font-medium">Period:</span> {loan.repaymentPeriod || 'N/A'} months
                               </div>
                               <div>
-                                <span className="font-medium">Expected Return:</span> {loan.interestRate ? (loan.interestRate * 100).toFixed(1) : 'N/A'}%
+                                <span className="font-medium">Expected Return:</span> {loan.interestRate ? (typeof loan.interestRate === 'string' ? loan.interestRate : (loan.interestRate * 100).toFixed(1)) : 'N/A'}%
                               </div>
                           <div>
                                 <span className="font-medium">Monthly:</span> SAR {loan.monthlyPayment?.toLocaleString() || 'N/A'}
