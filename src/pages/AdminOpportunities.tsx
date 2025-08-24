@@ -130,7 +130,6 @@ const AdminOpportunities = () => {
   const loadInvestments = async () => {
     try {
       setInvestmentsLoading(true);
-      console.log('🔄 Admin: Loading investments...');
       
       // Try to order by investedAt first, but fall back to creation time if that fails
       let q;
@@ -140,14 +139,11 @@ const AdminOpportunities = () => {
           orderBy("investedAt", "desc")
         );
       } catch (error) {
-        console.log('⚠️ Admin: Could not order by investedAt, using default order');
         q = query(collection(db, "investments"));
       }
       const querySnapshot = await getDocs(q);
-      console.log('📊 Admin: Found', querySnapshot.docs.length, 'investments');
       
       if (querySnapshot.empty) {
-        console.log('📊 Admin: No investments found in collection');
         setInvestments([]);
         return;
       }
@@ -181,9 +177,8 @@ const AdminOpportunities = () => {
       );
       
       setInvestments(investmentsWithUserDetails);
-      console.log("✅ Admin: Loaded investments with user details:", investmentsWithUserDetails);
     } catch (error) {
-      console.error("❌ Admin: Error loading investments:", error);
+      console.error("Error loading investments:", error);
       setInvestments([]);
     } finally {
       setInvestmentsLoading(false);
@@ -414,16 +409,14 @@ const AdminOpportunities = () => {
     const loadAllData = async () => {
       try {
         setLoading(true);
-        console.log('🔄 Admin: Loading all data...');
         await Promise.all([
           loadLoanRequests(),
           loadUsers(),
           loadOpportunities(),
           loadInvestments()
         ]);
-        console.log('✅ Admin: All data loaded successfully');
       } catch (error) {
-        console.error('❌ Admin: Error loading data:', error);
+        console.error('Error loading data:', error);
       } finally {
         setLoading(false);
       }
@@ -463,8 +456,6 @@ const AdminOpportunities = () => {
     );
   }
 
-  console.log('🔍 Admin: Rendering component. Investments:', investments.length, 'Loading:', investmentsLoading);
-  
   return (
     <div className="min-h-screen bg-background py-8">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -473,10 +464,6 @@ const AdminOpportunities = () => {
           <div>
             <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
             <p className="text-muted-foreground">Manage real loan requests and opportunities</p>
-            <p className="text-xs text-blue-600 mt-1">
-              Investments: {investmentsLoading ? 'Loading...' : investments.length} | 
-              Loans: {loanLoading ? 'Loading...' : loanRequests.length}
-            </p>
           </div>
           <div className="flex gap-4">
             <Button variant="outline" onClick={() => navigate('/')} className="bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200">
@@ -570,42 +557,21 @@ const AdminOpportunities = () => {
             </Card>
           </div>
 
-        <Tabs defaultValue="test-tab" className="space-y-6" onValueChange={(value) => {
-          console.log('🔄 Tab changed to:', value);
-          console.log('🔄 Tab value type:', typeof value);
-          console.log('🔄 Tab value length:', value.length);
-          console.log('🔄 Tab value chars:', Array.from(value).map(c => c.charCodeAt(0)));
-          const currentTabSpan = document.getElementById('currentTabSpan');
-          if (currentTabSpan) {
-            currentTabSpan.textContent = value;
-          }
-        }}>
+        <Tabs defaultValue="loan-management" className="space-y-6">
           <TabsList className="flex w-full flex-wrap gap-2">
-            <TabsTrigger value="test-tab">🧪 Test</TabsTrigger>
+
             <TabsTrigger value="loan-management">Loan Management</TabsTrigger>
             <TabsTrigger value="user-verification">User Verification</TabsTrigger>
             <TabsTrigger value="opportunities">Investment Opportunities</TabsTrigger>
-            <TabsTrigger 
-              value="lenders-investment" 
-              onClick={() => console.log('🔄 Clicked Lenders Investment tab')}
-            >
+            <TabsTrigger value="lenders-investment">
               Lenders Investment
             </TabsTrigger>
             <TabsTrigger value="system-info">System Info</TabsTrigger>
           </TabsList>
           
-          {/* Debug: Show current tab value */}
-          <div className="p-2 bg-gray-100 rounded text-xs text-gray-600">
-            Current tab: <span id="currentTabSpan">test-tab</span>
-          </div>
+
           
-          {/* Test Tab - Simple test to see if tabs work */}
-          <TabsContent value="test-tab" className="space-y-6">
-            <div className="p-4 bg-red-100 border border-red-300 rounded">
-              <h3 className="text-red-800 font-bold">🧪 TEST TAB - If you see this, tabs are working!</h3>
-              <p className="text-red-700">This is a simple test to verify the tab system is functioning.</p>
-            </div>
-          </TabsContent>
+
 
           {/* Loan Management Tab */}
           <TabsContent value="loan-management" className="space-y-6">
@@ -914,26 +880,6 @@ const AdminOpportunities = () => {
 
           {/* Lenders Investment Tab */}
           <TabsContent value="lenders-investment" className="space-y-6">
-            {/* Tab content test */}
-            <div className="p-4 bg-blue-100 border border-blue-300 rounded mb-4">
-              <h3 className="text-blue-800 font-bold">🔍 LENDERS INVESTMENT TAB CONTENT</h3>
-              <p className="text-blue-700">This blue box confirms the tab content is being rendered.</p>
-              <p className="text-blue-600 text-sm">Tab value: "lenders-investment"</p>
-            </div>
-            {/* Debug: This tab should be visible */}
-            <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mb-4">
-              <p className="text-yellow-800 text-sm">
-                🔍 Debug: Lenders Investment tab is rendering. 
-                Investments count: {investments.length}, 
-                Loading: {investmentsLoading ? 'Yes' : 'No'}
-              </p>
-            </div>
-            
-            {/* Force visible test */}
-            <div className="p-4 bg-green-100 border border-green-300 rounded mb-4">
-              <h3 className="text-green-800 font-bold">✅ LENDERS INVESTMENT TAB IS WORKING!</h3>
-              <p className="text-green-700">If you see this green box, the tab content is rendering correctly.</p>
-            </div>
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
