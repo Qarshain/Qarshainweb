@@ -140,7 +140,7 @@ const translations = {
     'howItWorks.step1Borrower': 'Submit Application',
     'howItWorks.step1BorrowerDesc': 'Complete loan application with your financial information',
     'howItWorks.step2Borrower': 'Instant Assessment',
-    'howItWorks.step2BorrowerDesc': 'Our system evaluates your application and determines reward rate',
+    'howItWorks.step2BorrowerDesc': 'Our system evaluates your application and determines expected return',
     'howItWorks.step3Borrower': 'Get Funding',
     'howItWorks.step3BorrowerDesc': 'Done! Receive your money within 24 hours',
     'howItWorks.step1Investor': 'Create Account',

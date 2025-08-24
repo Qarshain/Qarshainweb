@@ -52,7 +52,7 @@ const StrategicOpportunities = () => {
     title: isAr ? "فرص استثمارية استراتيجية" : "Strategic Investment Opportunities",
     subtitle: isAr ? "اكتشف أفضل الفرص الاستثمارية المختارة بعناية لتحقيق عوائد مثالية" : "Discover carefully curated investment opportunities for optimal returns",
     seeMore: isAr ? "عرض المزيد" : "See More",
-    expectedROI: isAr ? "العائد المتوقع" : "Expected ROI",
+            expectedROI: isAr ? "العائد المتوقع" : "Expected Return",
     fundingProgress: isAr ? "تقدم التمويل" : "Funding Progress",
     timeLeft: isAr ? "الوقت المتبقي" : "Time Left",
     investors: isAr ? "مستثمر" : "investors",

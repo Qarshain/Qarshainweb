@@ -46,7 +46,7 @@ const InvestDetail = () => {
             title: `${data.amount} SAR - ${data.repaymentPeriod} months`,
             description: data.purpose || "Personal loan request",
             amount: data.amount,
-            interestRate: 8 + Math.random() * 4, // Random reward rate between 8-12%
+            interestRate: 8 + Math.random() * 4, // Random expected return between 8-12%
             term: `${data.repaymentPeriod} months`,
             risk: data.riskLevel || 'medium',
             borrowerName: data.name || "Anonymous",
@@ -302,7 +302,7 @@ const InvestDetail = () => {
       )}
       
       <div className="mb-2">Amount: {formatSAR(opportunity.amount, language)}</div>
-              <div className="mb-2">Reward: {opportunity.interestRate}%</div>
+              <div className="mb-2">Expected Return: {opportunity.interestRate}%</div>
       <div className="mb-2">Term: {opportunity.term}</div>
       <div className="mb-2">Risk: {opportunity.risk}</div>
       <form onSubmit={handleInvest} className="mt-6 space-y-4">
