@@ -136,7 +136,7 @@ const InvestDetail = () => {
         amount: investmentAmount,
         investedAt: new Date(),
         status: 'active',
-        expectedReturn: investmentAmount * (1 + (typeof opportunity.interestRate === 'string' ? 0.055 : opportunity.interestRate / 100)),
+        expectedReturn: investmentAmount, // No interest, just return the principal
         repaymentDate: new Date(Date.now() + (opportunity.term.includes('12') ? 365 : opportunity.term.includes('6') ? 180 : 90) * 24 * 60 * 60 * 1000)
       });
       
