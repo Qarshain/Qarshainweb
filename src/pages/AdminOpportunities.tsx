@@ -1015,7 +1015,12 @@ const AdminOpportunities = () => {
                                 <span className="font-medium">Amount:</span> SAR {investment.amount?.toLocaleString() || 'N/A'}
                               </div>
                               <div>
-                                <span className="font-medium">Expected Return:</span> {investment.expectedReturn ? (investment.expectedReturn * 100).toFixed(1) : 'N/A'}%
+                                <span className="font-medium">Expected Return:</span> {investment.expectedReturn ? ((investment.expectedReturn / investment.amount - 1) * 100).toFixed(1) : 'N/A'}%
+                                {investment.expectedReturn && (
+                                  <span className="text-xs text-muted-foreground ml-2">
+                                    (Total: SAR {investment.expectedReturn?.toLocaleString() || 'N/A'})
+                                  </span>
+                                )}
                               </div>
                               <div>
                                 <span className="font-medium">Status:</span> 
