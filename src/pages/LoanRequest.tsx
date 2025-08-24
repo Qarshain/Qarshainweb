@@ -253,7 +253,7 @@ export default function LoanRequest() {
         submittedAt: serverTimestamp(),
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
-        interestRate: 10, // 10% annual interest rate
+        interestRate: 10, // 10% annual reward rate
         monthlyPayment: loanDetails.monthlyPayment,
         totalRepayment: loanDetails.totalRepayment,
         daysRemaining: repaymentPeriod * 30

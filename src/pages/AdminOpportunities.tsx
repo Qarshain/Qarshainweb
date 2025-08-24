@@ -38,9 +38,11 @@ const AdminOpportunities = () => {
   const [loanRequests, setLoanRequests] = useState<any[]>([]);
   const [opportunities, setOpportunities] = useState<any[]>([]);
   const [users, setUsers] = useState<any[]>([]);
+  const [investments, setInvestments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [loanLoading, setLoanLoading] = useState(true);
   const [userLoading, setUserLoading] = useState(true);
+  const [investmentsLoading, setInvestmentsLoading] = useState(true);
 
   // Load real loan requests from Firebase
   const loadLoanRequests = async () => {
@@ -121,6 +123,70 @@ const AdminOpportunities = () => {
       setLoanRequests([]);
     } finally {
       setLoanLoading(false);
+    }
+  };
+
+  // Load investments from Firebase
+  const loadInvestments = async () => {
+    try {
+      setInvestmentsLoading(true);
+      console.log('🔄 Admin: Loading investments...');
+      
+      // Try to order by investedAt first, but fall back to creation time if that fails
+      let q;
+      try {
+        q = query(
+          collection(db, "investments"),
+          orderBy("investedAt", "desc")
+        );
+      } catch (error) {
+        console.log('⚠️ Admin: Could not order by investedAt, using default order');
+        q = query(collection(db, "investments"));
+      }
+      const querySnapshot = await getDocs(q);
+      console.log('📊 Admin: Found', querySnapshot.docs.length, 'investments');
+      
+      if (querySnapshot.empty) {
+        console.log('📊 Admin: No investments found in collection');
+        setInvestments([]);
+        return;
+      }
+      
+      const investmentsData = querySnapshot.docs.map(doc => ({ 
+        id: doc.id, 
+        ...(doc.data() as any) 
+      }));
+      
+      // Try to get user details for each investment
+      const investmentsWithUserDetails = await Promise.all(
+        investmentsData.map(async (investment: any) => {
+          try {
+            if (investment.userId) {
+              const userDoc = await getDoc(doc(db, "users", investment.userId));
+              if (userDoc.exists()) {
+                const userData = userDoc.data();
+                return {
+                  ...investment,
+                  userName: userData.name || userData.email || 'Anonymous',
+                  userEmail: userData.email || 'N/A'
+                };
+              }
+            }
+            return investment;
+          } catch (error) {
+            console.warn('Could not fetch user details for investment:', investment.id);
+            return investment;
+          }
+        })
+      );
+      
+      setInvestments(investmentsWithUserDetails);
+      console.log("✅ Admin: Loaded investments with user details:", investmentsWithUserDetails);
+    } catch (error) {
+      console.error("❌ Admin: Error loading investments:", error);
+      setInvestments([]);
+    } finally {
+      setInvestmentsLoading(false);
     }
   };
 
@@ -348,15 +414,18 @@ const AdminOpportunities = () => {
     const loadAllData = async () => {
       try {
         setLoading(true);
+        console.log('🔄 Admin: Loading all data...');
         await Promise.all([
           loadLoanRequests(),
           loadUsers(),
-          loadOpportunities()
+          loadOpportunities(),
+          loadInvestments()
         ]);
+        console.log('✅ Admin: All data loaded successfully');
       } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('❌ Admin: Error loading data:', error);
       } finally {
-      setLoading(false);
+        setLoading(false);
       }
     };
     
@@ -394,6 +463,8 @@ const AdminOpportunities = () => {
     );
   }
 
+  console.log('🔍 Admin: Rendering component. Investments:', investments.length, 'Loading:', investmentsLoading);
+  
   return (
     <div className="min-h-screen bg-background py-8">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -402,6 +473,10 @@ const AdminOpportunities = () => {
           <div>
             <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
             <p className="text-muted-foreground">Manage real loan requests and opportunities</p>
+            <p className="text-xs text-blue-600 mt-1">
+              Investments: {investmentsLoading ? 'Loading...' : investments.length} | 
+              Loans: {loanLoading ? 'Loading...' : loanRequests.length}
+            </p>
           </div>
           <div className="flex gap-4">
             <Button variant="outline" onClick={() => navigate('/')} className="bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200">
@@ -411,6 +486,10 @@ const AdminOpportunities = () => {
             <Button variant="outline" onClick={loadLoanRequests} disabled={loanLoading}>
               <RefreshCw className={`h-4 w-4 mr-2 ${loanLoading ? 'animate-spin' : ''}`} />
               Refresh Loans
+            </Button>
+            <Button variant="outline" onClick={loadInvestments} disabled={investmentsLoading}>
+              <RefreshCw className={`h-4 w-4 mr-2 ${investmentsLoading ? 'animate-spin' : ''}`} />
+              Refresh Investments
             </Button>
             <Button variant="outline" onClick={() => navigate('/dashboard')}>
               Back to Dashboard
@@ -427,7 +506,7 @@ const AdminOpportunities = () => {
         </div>
 
         {/* Statistics Overview */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-8">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Loan Requests</CardTitle>
@@ -476,15 +555,57 @@ const AdminOpportunities = () => {
               <p className="text-xs text-muted-foreground">Already processed</p>
               </CardContent>
             </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Investments</CardTitle>
+              <TrendingUp className="h-4 w-4 text-blue-500" />
+              </CardHeader>
+              <CardContent>
+              <div className="text-2xl font-bold text-blue-600">
+                {investmentsLoading ? '...' : investments.length}
+              </div>
+              <p className="text-xs text-muted-foreground">Lender investments</p>
+              </CardContent>
+            </Card>
           </div>
 
-        <Tabs defaultValue="loan-management" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+        <Tabs defaultValue="test-tab" className="space-y-6" onValueChange={(value) => {
+          console.log('🔄 Tab changed to:', value);
+          console.log('🔄 Tab value type:', typeof value);
+          console.log('🔄 Tab value length:', value.length);
+          console.log('🔄 Tab value chars:', Array.from(value).map(c => c.charCodeAt(0)));
+          const currentTabSpan = document.getElementById('currentTabSpan');
+          if (currentTabSpan) {
+            currentTabSpan.textContent = value;
+          }
+        }}>
+          <TabsList className="flex w-full flex-wrap gap-2">
+            <TabsTrigger value="test-tab">🧪 Test</TabsTrigger>
             <TabsTrigger value="loan-management">Loan Management</TabsTrigger>
             <TabsTrigger value="user-verification">User Verification</TabsTrigger>
             <TabsTrigger value="opportunities">Investment Opportunities</TabsTrigger>
+            <TabsTrigger 
+              value="lenders-investment" 
+              onClick={() => console.log('🔄 Clicked Lenders Investment tab')}
+            >
+              Lenders Investment
+            </TabsTrigger>
             <TabsTrigger value="system-info">System Info</TabsTrigger>
           </TabsList>
+          
+          {/* Debug: Show current tab value */}
+          <div className="p-2 bg-gray-100 rounded text-xs text-gray-600">
+            Current tab: <span id="currentTabSpan">test-tab</span>
+          </div>
+          
+          {/* Test Tab - Simple test to see if tabs work */}
+          <TabsContent value="test-tab" className="space-y-6">
+            <div className="p-4 bg-red-100 border border-red-300 rounded">
+              <h3 className="text-red-800 font-bold">🧪 TEST TAB - If you see this, tabs are working!</h3>
+              <p className="text-red-700">This is a simple test to verify the tab system is functioning.</p>
+            </div>
+          </TabsContent>
 
           {/* Loan Management Tab */}
           <TabsContent value="loan-management" className="space-y-6">
@@ -533,7 +654,7 @@ const AdminOpportunities = () => {
                                 <span className="font-medium">Period:</span> {loan.repaymentPeriod || 'N/A'} months
                               </div>
                               <div>
-                                <span className="font-medium">Interest:</span> {loan.interestRate ? (loan.interestRate * 100).toFixed(1) : 'N/A'}%
+                                <span className="font-medium">Reward:</span> {loan.interestRate ? (loan.interestRate * 100).toFixed(1) : 'N/A'}%
                               </div>
                           <div>
                                 <span className="font-medium">Monthly:</span> SAR {loan.monthlyPayment?.toLocaleString() || 'N/A'}
@@ -709,7 +830,7 @@ const AdminOpportunities = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="interestRate" className="block text-sm font-medium mb-1">Interest Rate (%)</label>
+                      <label htmlFor="interestRate" className="block text-sm font-medium mb-1">Reward Rate (%)</label>
                       <Input
                         id="interestRate"
                         type="number"
@@ -791,6 +912,136 @@ const AdminOpportunities = () => {
               </Card>
           </TabsContent>
 
+          {/* Lenders Investment Tab */}
+          <TabsContent value="lenders-investment" className="space-y-6">
+            {/* Tab content test */}
+            <div className="p-4 bg-blue-100 border border-blue-300 rounded mb-4">
+              <h3 className="text-blue-800 font-bold">🔍 LENDERS INVESTMENT TAB CONTENT</h3>
+              <p className="text-blue-700">This blue box confirms the tab content is being rendered.</p>
+              <p className="text-blue-600 text-sm">Tab value: "lenders-investment"</p>
+            </div>
+            {/* Debug: This tab should be visible */}
+            <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mb-4">
+              <p className="text-yellow-800 text-sm">
+                🔍 Debug: Lenders Investment tab is rendering. 
+                Investments count: {investments.length}, 
+                Loading: {investmentsLoading ? 'Yes' : 'No'}
+              </p>
+            </div>
+            
+            {/* Force visible test */}
+            <div className="p-4 bg-green-100 border border-green-300 rounded mb-4">
+              <h3 className="text-green-800 font-bold">✅ LENDERS INVESTMENT TAB IS WORKING!</h3>
+              <p className="text-green-700">If you see this green box, the tab content is rendering correctly.</p>
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  Lenders Investment Overview
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold">All Investments ({investments.length})</h3>
+                  <Button onClick={loadInvestments} variant="outline" size="sm" disabled={investmentsLoading}>
+                    <RefreshCw className={`h-4 w-4 mr-2 ${investmentsLoading ? 'animate-spin' : ''}`} />
+                    Refresh
+                  </Button>
+                </div>
+                
+                {investmentsLoading ? (
+                  <div className="text-center py-8">Loading investments...</div>
+                ) : investments.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <p>No investments found in your system.</p>
+                    <p className="text-sm mt-2">Investments will appear here when lenders invest in loans.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {investments.map((investment) => (
+                      <div key={investment.id} className="border rounded-lg p-4 space-y-3">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <User className="h-4 w-4 text-muted-foreground" />
+                              <span className="font-medium">{investment.userName || `Lender ID: ${investment.userId}` || 'Anonymous'}</span>
+                              <Badge variant="default" className="bg-blue-100 text-blue-800">
+                                Investment
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground mb-2">
+                              Loan ID: {investment.loanRequestId || 'N/A'}
+                              {investment.userEmail && investment.userEmail !== 'N/A' && (
+                                <span className="ml-4">• Email: {investment.userEmail}</span>
+                              )}
+                            </p>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                              <div>
+                                <span className="font-medium">Amount:</span> SAR {investment.amount?.toLocaleString() || 'N/A'}
+                              </div>
+                              <div>
+                                <span className="font-medium">Expected Return:</span> {investment.expectedReturn ? (investment.expectedReturn * 100).toFixed(1) : 'N/A'}%
+                              </div>
+                              <div>
+                                <span className="font-medium">Status:</span> 
+                                <Badge 
+                                  variant={investment.status === 'active' ? 'default' : 'secondary'}
+                                  className={investment.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}
+                                >
+                                  {investment.status || 'active'}
+                                </Badge>
+                              </div>
+                              <div>
+                                <span className="font-medium">Invested:</span> 
+                                {investment.investedAt ? (
+                                  investment.investedAt.toDate ? 
+                                    investment.investedAt.toDate().toLocaleDateString() : 
+                                    new Date(investment.investedAt).toLocaleDateString()
+                                ) : 'N/A'}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Investment Summary */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Investment Summary</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="text-center p-4 bg-blue-50 rounded-lg">
+                    <div className="text-2xl font-bold text-blue-600">
+                      SAR {investments.reduce((total, inv) => total + (inv.amount || 0), 0).toLocaleString()}
+                    </div>
+                    <p className="text-sm text-blue-800">Total Invested</p>
+                  </div>
+                  <div className="text-center p-4 bg-green-50 rounded-lg">
+                    <div className="text-2xl font-bold text-green-600">
+                      {investments.filter(inv => inv.status === 'active').length}
+                    </div>
+                    <p className="text-sm text-green-800">Active Investments</p>
+                  </div>
+                  <div className="text-center p-4 bg-purple-50 rounded-lg">
+                    <div className="text-2xl font-bold text-purple-600">
+                      {investments.length > 0 ? 
+                        (investments.reduce((total, inv) => total + (inv.amount || 0), 0) / investments.length).toFixed(0) : 0
+                      }
+                    </div>
+                    <p className="text-sm text-purple-800">Average Investment</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           {/* System Info Tab */}
           <TabsContent value="system-info" className="space-y-6">
             <Card>
@@ -804,15 +1055,23 @@ const AdminOpportunities = () => {
                       <h4 className="font-medium">Database Status</h4>
                       <p className="text-sm text-green-600">Connected to Firebase</p>
                     </div>
-                  <div>
+                    <div>
                       <h4 className="font-medium">Loan Requests</h4>
                       <p className="text-sm text-blue-600">{loanRequests.length} total</p>
-                  </div>
-                  <div>
+                    </div>
+                    <div>
                       <h4 className="font-medium">Pending Loans</h4>
                       <p className="text-sm text-orange-600">{loanRequests.filter(loan => loan.status === 'pending').length} need approval</p>
-                  </div>
-                  <div>
+                    </div>
+                    <div>
+                      <h4 className="font-medium">Total Investments</h4>
+                      <p className="text-sm text-purple-600">{investments.length} total</p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium">Total Invested Amount</h4>
+                      <p className="text-sm text-green-600">SAR {investments.reduce((total, inv) => total + (inv.amount || 0), 0).toLocaleString()}</p>
+                    </div>
+                    <div>
                       <h4 className="font-medium">Last Updated</h4>
                       <p className="text-sm text-muted-foreground">{new Date().toLocaleString()}</p>
                     </div>
@@ -822,7 +1081,9 @@ const AdminOpportunities = () => {
                     <h4 className="font-medium text-blue-800 mb-2">How to use this dashboard:</h4>
                     <ul className="text-sm text-blue-700 space-y-1">
                       <li>• <strong>Loan Management:</strong> View and approve/reject loan requests from borrowers</li>
+                      <li>• <strong>User Verification:</strong> Manage user KYC status and verification</li>
                       <li>• <strong>Investment Opportunities:</strong> Create and manage investment opportunities</li>
+                      <li>• <strong>Lenders Investment:</strong> Monitor all lender investments and track funding</li>
                       <li>• <strong>Refresh:</strong> Click the refresh button to load latest data</li>
                       <li>• <strong>Real-time:</strong> All data comes directly from your Firebase database</li>
                     </ul>

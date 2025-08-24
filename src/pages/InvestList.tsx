@@ -59,7 +59,7 @@ const InvestList = () => {
     filterHighRisk: isAr ? "مخاطر عالية" : "High Risk",
     sortBy: isAr ? "ترتيب حسب" : "Sort by",
     sortAmount: isAr ? "المبلغ" : "Amount",
-    sortInterest: isAr ? "معدل الفائدة" : "Interest Rate",
+            sortInterest: isAr ? "معدل الربح" : "Reward Rate",
     sortRisk: isAr ? "المخاطر" : "Risk",
     sortDays: isAr ? "الأيام المتبقية" : "Days Remaining",
     riskLevel: isAr ? "مستوى المخاطر" : "Risk Level",
@@ -77,7 +77,7 @@ const InvestList = () => {
     statusClosed: isAr ? "مغلق" : "Closed",
     noOpportunities: isAr ? "لا توجد فرص استثمار متاحة حالياً" : "No investment opportunities available at the moment",
     loading: isAr ? "جاري تحميل الفرص..." : "Loading opportunities...",
-    interestRate: isAr ? "معدل الفائدة" : "Interest Rate"
+    interestRate: isAr ? "معدل الربح" : "Reward Rate"
   };
 
   // Manual check of current opportunities state

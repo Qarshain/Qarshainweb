@@ -62,7 +62,7 @@ const AdminLoanReview: React.FC<AdminLoanReviewProps> = ({
     adjustTerms: isAr ? 'تعديل الشروط' : 'Adjust Terms',
     approvedAmount: isAr ? 'المبلغ المعتمد' : 'Approved Amount',
     approvedTerms: isAr ? 'المدة المعتمدة' : 'Approved Terms',
-    interestRate: isAr ? 'معدل الفائدة' : 'Interest Rate',
+            interestRate: isAr ? 'معدل الربح' : 'Reward Rate',
     rejectionReason: isAr ? 'سبب الرفض' : 'Rejection Reason',
     additionalData: isAr ? 'البيانات المطلوبة' : 'Required Data',
     potentialMatches: isAr ? 'المطابقات المحتملة' : 'Potential Matches',
