@@ -559,19 +559,107 @@ const AdminOpportunities = () => {
 
         <Tabs defaultValue="loan-management" className="space-y-6">
           <TabsList className="flex w-full flex-wrap gap-2">
-
-            <TabsTrigger value="loan-management">Loan Management</TabsTrigger>
             <TabsTrigger value="user-verification">User Verification</TabsTrigger>
+            <TabsTrigger value="loan-management">Loan Management</TabsTrigger>
+            <TabsTrigger value="lenders-investment">Lenders Investment</TabsTrigger>
             <TabsTrigger value="opportunities">Investment Opportunities</TabsTrigger>
-            <TabsTrigger value="lenders-investment">
-              Lenders Investment
-            </TabsTrigger>
             <TabsTrigger value="system-info">System Info</TabsTrigger>
           </TabsList>
           
 
           
 
+
+          {/* User Verification Tab */}
+          <TabsContent value="user-verification" className="space-y-6">
+              <Card>
+                <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Shield className="h-5 w-5" />
+                  User KYC Verification Management
+                </CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  ℹ️ Users are automatically approved upon registration. The system will auto-approve any pending users.
+                </p>
+                </CardHeader>
+                <CardContent>
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-semibold">User Accounts Requiring Verification</h2>
+                  <Button onClick={loadUsers} variant="outline" size="sm" disabled={userLoading}>
+                    <RefreshCw className={`h-4 w-4 mr-2 ${userLoading ? 'animate-spin' : ''}`} />
+                    Refresh Users
+                  </Button>
+                    </div>
+
+                {userLoading ? (
+                  <div className="text-center py-8">Loading users...</div>
+                ) : users.length === 0 ? (
+                    <div className="text-center py-8 text-muted-foreground">
+                    <p>No users found in your system.</p>
+                    <p className="text-sm mt-2">Users will appear here once they create accounts.</p>
+                    </div>
+                  ) : (
+                  <div className="space-y-4">
+                    {users.map((user) => (
+                      <div key={user.id} className="border rounded-lg p-4 space-y-3">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <User className="h-4 w-4 text-muted-foreground" />
+                              <span className="font-medium">{(user as any).name || 'No Name'}</span>
+                              <Badge variant={(user as any).kycStatus === 'pending' ? 'secondary' : (user as any).kycStatus === 'approved' ? 'default' : 'destructive'}>
+                                {(user as any).kycStatus === 'pending' ? 'Pending' : (user as any).kycStatus === 'approved' ? 'Approved' : (user as any).kycStatus || 'No Status'}
+                              </Badge>
+                              <Badge variant={(user as any).userType === 'borrower' ? 'default' : 'secondary'}>
+                                {(user as any).userType === 'borrower' ? 'Borrower' : 'Lender'}
+                            </Badge>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                              <div>
+                                <span className="font-medium">Email:</span> {(user as any).email || 'N/A'}
+                              </div>
+                              <div>
+                                <span className="font-medium">Mobile:</span> {(user as any).mobileNumber || 'N/A'}
+                              </div>
+                              <div>
+                                <span className="font-medium">ID Number:</span> {(user as any).idNumber || 'N/A'}
+                              </div>
+                            </div>
+                            {(user as any).createdAt && (
+                              <div className="text-xs text-muted-foreground mt-2">
+                                Account Created: {(user as any).createdAt.toDate?.()?.toLocaleString() || (user as any).createdAt.toLocaleString() || 'N/A'}
+                              </div>
+                            )}
+                          </div>
+                          
+                          {(user as any).kycStatus === 'pending' && (
+                            <div className="flex gap-2">
+                              <Button
+                                size="sm"
+                                onClick={() => handleUserVerification(user.id, 'approved')}
+                                className="bg-green-600 hover:bg-green-700"
+                              >
+                                <CheckCircle className="h-4 w-4 mr-1" />
+                                Approve
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => handleUserVerification(user.id, 'rejected')}
+                              >
+                                <XCircle className="h-4 w-4 mr-1" />
+                                Reject
+                              </Button>
+                            </div>
+                          )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+          </TabsContent>
 
           {/* Loan Management Tab */}
           <TabsContent value="loan-management" className="space-y-6">
