@@ -179,7 +179,7 @@ export default function LoanRequest() {
     summary: isAr ? "ملخص القرض" : "Loan Summary",
     principal: isAr ? "المبلغ الأساسي" : "Principal Amount",
     platformFee: isAr ? "رسوم المنصة (2.5%)" : "Platform Fee (2.5%)",
-    investorReturn: isAr ? "الربح المتوقع للمستثمرين" : "Expected Investor Return",
+    
     totalRepayment: isAr ? "إجمالي المبلغ المسدد" : "Total Repayment",
     monthlyPayment: isAr ? "القسط الشهري المتوقع" : "Expected Monthly Payment",
     shariah: isAr ? "متوافق مع أحكام الشريعة الإسلامية" : "Shariah Compliant",
@@ -486,10 +486,7 @@ export default function LoanRequest() {
                         <span>{labels.platformFee}</span>
                         <span className="font-bold">{formatSAR(loanDetails.platformFee)}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>{labels.investorReturn}</span>
-                        <span className="font-bold">{formatSAR(loanDetails.investorReturn)}</span>
-                      </div>
+
                       <div className="border-t border-[hsl(45,85%,55%)] border-opacity-30 pt-3">
                         <div className="flex justify-between text-lg font-bold text-[hsl(45,85%,55%)]">
                           <span>{labels.totalRepayment}</span>
@@ -637,10 +634,7 @@ export default function LoanRequest() {
                             <span>{labels.platformFee}</span>
                             <span className="font-bold">{formatSAR(loanDetails.platformFee)}</span>
                           </div>
-                          <div className="flex justify-between">
-                            <span>{labels.investorReturn}</span>
-                            <span className="font-bold">{formatSAR(loanDetails.investorReturn)}</span>
-                          </div>
+
                           <div className="border-t border-[hsl(45,85%,55%)] border-opacity-30 pt-3">
                             <div className="flex justify-between text-lg font-bold text-[hsl(45,85%,55%)]">
                               <span>{labels.totalRepayment}</span>
