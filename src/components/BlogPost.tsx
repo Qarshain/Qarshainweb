@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -98,115 +99,68 @@ export const BlogPost: React.FC = () => {
       {/* How It Works Section */}
       <section className="mb-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-8">How the Platform Works</h2>
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8">
-          <div className="space-y-12">
+        
+        <div className="prose prose-lg max-w-none">
+          <p className="text-lg text-gray-700 leading-relaxed mb-8">
+            Qarshain operates on a sophisticated dual-sided marketplace model that seamlessly connects borrowers seeking funding with lenders looking for investment opportunities. The platform's architecture is designed to eliminate traditional banking friction while maintaining the highest standards of security, transparency, and user experience.
+          </p>
+        </div>
+
+        <div className="space-y-12">
           {/* For Borrowers */}
           <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <User className="h-5 w-5 text-green-600" />
-              For Borrowers (المقترضين)
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                <User className="h-4 w-4 text-green-600" />
+              </div>
+              For Borrowers: A Streamlined Journey to Funding
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-green-600 font-semibold text-sm">1</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">Simple Registration</h4>
-                    <p className="text-sm text-gray-600">Create account, complete KYC, get instant approval</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-green-600 font-semibold text-sm">2</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">Loan Application</h4>
-                    <p className="text-sm text-gray-600">Submit requests with clear terms and documentation</p>
-                  </div>
-                </div>
-              </div>
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                The borrower experience on Qarshain is designed around simplicity and speed. Unlike traditional banks that require extensive paperwork and lengthy approval processes, our platform leverages advanced technology to deliver funding decisions in minutes rather than weeks.
+              </p>
               
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-green-600 font-semibold text-sm">3</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">Smart Matching</h4>
-                    <p className="text-sm text-gray-600">AI algorithm matches you with suitable lenders</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-green-600 font-semibold text-sm">4</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">Payment Management</h4>
-                    <p className="text-sm text-gray-600">Automated reminders and payment tracking</p>
-                  </div>
-                </div>
-              </div>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                The journey begins with a straightforward registration process that combines identity verification with comprehensive Know Your Customer (KYC) procedures. Our system integrates with Saudi Arabia's national identity infrastructure to ensure rapid yet thorough verification. Once registered, borrowers can immediately access the loan application interface, where they can specify their funding requirements, preferred terms, and provide supporting documentation.
+              </p>
+              
+              <p className="text-gray-700 leading-relaxed mb-6">
+                The platform's intelligent matching algorithm then analyzes the loan request against our network of verified lenders, considering factors such as risk appetite, investment preferences, and portfolio diversification needs. This AI-driven approach ensures that borrowers are connected with lenders who are genuinely interested in their specific type of loan, resulting in faster approvals and more competitive interest rates.
+              </p>
+              
+              <p className="text-gray-700 leading-relaxed">
+                Once funding is secured, borrowers benefit from our comprehensive payment management system, which includes automated reminders, flexible payment options, and real-time loan tracking. The system is designed to help borrowers maintain good payment history while providing the flexibility to adjust payment schedules when needed.
+              </p>
             </div>
           </div>
 
           {/* For Lenders */}
           <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-blue-600" />
-              For Lenders (المقرضين)
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <TrendingUp className="h-4 w-4 text-blue-600" />
+              </div>
+              For Lenders: Intelligent Investment Opportunities
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-semibold text-sm">1</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">Browse Opportunities</h4>
-                    <p className="text-sm text-gray-600">Explore verified loan requests with risk assessments</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-semibold text-sm">2</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">Invest Smartly</h4>
-                    <p className="text-sm text-gray-600">Choose loans that match your risk profile</p>
-                  </div>
-                </div>
-              </div>
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                Lenders on Qarshain gain access to a curated marketplace of verified loan opportunities, each accompanied by comprehensive risk assessments and borrower profiles. Our platform transforms traditional lending from a passive activity into an active, data-driven investment strategy.
+              </p>
               
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-semibold text-sm">3</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">Track Performance</h4>
-                    <p className="text-sm text-gray-600">Monitor investments with real-time analytics</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-semibold text-sm">4</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">Receive Returns</h4>
-                    <p className="text-sm text-gray-600">Automated interest and principal payments</p>
-                  </div>
-                </div>
-              </div>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                The investment process begins with our sophisticated opportunity discovery system, which presents lenders with loan requests that match their specific risk tolerance and investment criteria. Each opportunity includes detailed borrower information, credit assessments, loan purpose verification, and historical performance data when available. This transparency allows lenders to make informed decisions based on comprehensive data rather than limited application forms.
+              </p>
+              
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Our platform's risk management tools enable lenders to diversify their portfolios across multiple loans, reducing overall risk exposure while maximizing potential returns. The system provides real-time analytics and performance tracking, allowing lenders to monitor their investments and adjust their strategies based on market conditions and portfolio performance.
+              </p>
+              
+              <p className="text-gray-700 leading-relaxed">
+                The automated returns system ensures that lenders receive their interest payments and principal repayments on schedule, with full transparency into payment status and borrower communication. This hands-off approach allows lenders to focus on portfolio optimization while the platform handles the operational complexities of loan management and collection.
+              </p>
             </div>
-          </div>
           </div>
         </div>
       </section>
@@ -252,41 +206,57 @@ export const BlogPost: React.FC = () => {
       {/* Email Reminder System */}
       <section className="mb-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Automated Payment Reminders</h2>
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8">
-          <p className="text-gray-700 mb-6">
-            Our advanced email reminder system ensures borrowers never miss a payment, with beautiful Arabic RTL templates and smart scheduling.
+        
+        <div className="prose prose-lg max-w-none">
+          <p className="text-lg text-gray-700 leading-relaxed mb-8">
+            Our advanced email reminder system ensures borrowers never miss a payment, with beautiful Arabic RTL templates and smart scheduling. This comprehensive system operates on multiple levels to maintain healthy loan relationships and minimize defaults.
           </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 bg-green-50 border border-green-200 rounded-lg">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <Clock className="h-5 w-5 text-green-600" />
-                </div>
-                <h3 className="font-semibold text-green-900">Upcoming Payment</h3>
+        </div>
+
+        <div className="space-y-8">
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                <Clock className="h-4 w-4 text-green-600" />
               </div>
-              <p className="text-sm text-green-800">Friendly reminder sent 3 days before due date</p>
+              Upcoming Payment Reminders
+            </h3>
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              Our system proactively sends friendly reminders to borrowers three days before their payment due date. These notifications are designed to be helpful rather than intrusive, providing clear information about the upcoming payment amount, due date, and available payment methods.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              The reminders include direct links to payment portals and contact information for borrowers who may need assistance or have questions about their loan terms. This early notification system has proven to significantly reduce late payments and improve overall borrower satisfaction.
+            </p>
             </div>
             
-            <div className="p-6 bg-orange-50 border border-orange-200 rounded-lg">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                  <AlertTriangle className="h-5 w-5 text-orange-600" />
-                </div>
-                <h3 className="font-semibold text-orange-900">Overdue Warning</h3>
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                <AlertTriangle className="h-4 w-4 text-orange-600" />
               </div>
-              <p className="text-sm text-orange-800">Alert when payment is late with days overdue</p>
+              Overdue Payment Warnings
+            </h3>
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              When a payment becomes overdue, our system automatically escalates the communication strategy. Borrowers receive clear warnings about their overdue status, including the number of days past due and any applicable late fees or penalties.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              These warnings are designed to be firm but fair, emphasizing the importance of maintaining good payment history while offering support and flexible payment options when appropriate. The system also provides lenders with real-time updates on payment status and borrower communication.
+            </p>
             </div>
             
-            <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                  <Bell className="h-5 w-5 text-red-600" />
-                </div>
-                <h3 className="font-semibold text-red-900">Final Notice</h3>
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                <Bell className="h-4 w-4 text-red-600" />
               </div>
-              <p className="text-sm text-red-800">Urgent notice after 7 days overdue</p>
-            </div>
+              Final Notice and Escalation
+            </h3>
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              After seven days of overdue status, the system issues final notices to borrowers. These communications are more urgent in tone while still maintaining professionalism and offering clear paths to resolution.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              The final notice system includes automatic escalation to our customer support team and, when necessary, coordination with our risk management department. This ensures that serious payment issues are addressed promptly while maintaining the platform's commitment to fair and transparent lending practices.
+            </p>
           </div>
         </div>
       </section>
@@ -325,8 +295,8 @@ export const BlogPost: React.FC = () => {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-4 text-sm text-gray-600">
               <span>Published December 15, 2024</span>
-              <span>•</span>
-              <span>Qarshain Editorial Team</span>
+            <span>•</span>
+            <span>Qarshain Editorial Team</span>
               <span>•</span>
               <span>8 min read</span>
             </div>
@@ -347,6 +317,9 @@ export const BlogPost: React.FC = () => {
               <Share2 className="h-4 w-4" />
               Share Article
             </Button>
+            <Button variant="outline" size="sm" className="flex items-center gap-2" asChild>
+              <Link to="/blog-ar">العربية</Link>
+            </Button>
           </div>
         </div>
         
@@ -360,10 +333,10 @@ export const BlogPost: React.FC = () => {
               <p className="text-sm text-gray-600 leading-relaxed">
                 This article is for informational purposes only and does not constitute financial advice. 
                 Please consult with qualified financial advisors before making investment decisions. 
-                Qarshain is a registered financial services provider in Saudi Arabia.
-              </p>
-            </div>
-          </div>
+            Qarshain is a registered financial services provider in Saudi Arabia.
+          </p>
+        </div>
+      </div>
         </div>
       </footer>
     </div>

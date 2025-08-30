@@ -19,6 +19,7 @@ import Transactions from "./pages/Transactions";
 import UserProfile from "./components/UserProfile";
 import EmailTest from "./pages/EmailTest";
 import Blog from "./pages/Blog";
+import BlogArabic from "./pages/BlogArabic";
 import { useAnalytics } from "./hooks/useAnalytics";
 import { ConsentBanner } from "./components/ConsentBanner";
 import { GoogleAnalytics } from "./components/GoogleAnalytics";
@@ -52,6 +53,7 @@ function AppRoutes() {
       <Route path="/loan-request" element={<LoanRequest />} />
       <Route path="/email-test" element={<PrivateRoute><EmailTest /></PrivateRoute>} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/blog-ar" element={<BlogArabic />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>

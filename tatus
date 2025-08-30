@@ -1,0 +1,5 @@
+[33m814da53[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m fix: Resolve Vercel build failures
+[33md35f27a[m fix: Resolve build errors for blog post deployment
+[33m2d6c5a2[m debug: Add debug messages to blog components to troubleshoot display issues
+[33ma265186[m feat: Publish 'How Qarshain Works' blog post
+[33me118984[m feat: Add payment reminders to borrower dashboard
