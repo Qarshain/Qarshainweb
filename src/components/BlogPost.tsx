@@ -141,12 +141,12 @@ export const BlogPost: React.FC = () => {
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-16">
           {/* For Borrowers */}
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <User className="h-4 w-4 text-green-600" />
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <h3 className="text-3xl font-bold text-gray-900 mb-8 flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                <User className="h-6 w-6 text-white" />
               </div>
               For Borrowers: A Streamlined Journey to Funding
             </h3>
@@ -171,10 +171,10 @@ export const BlogPost: React.FC = () => {
           </div>
 
           {/* For Lenders */}
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <TrendingUp className="h-4 w-4 text-blue-600" />
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <h3 className="text-3xl font-bold text-gray-900 mb-8 flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                <TrendingUp className="h-6 w-6 text-white" />
               </div>
               For Lenders: Intelligent Investment Opportunities
             </h3>
@@ -200,13 +200,24 @@ export const BlogPost: React.FC = () => {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="flex items-center justify-center my-16">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div className="mx-8 w-3 h-3 bg-blue-500 rounded-full"></div>
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+      </div>
+
       {/* The Qarshain Advantage */}
       <section id="advantage" className="mb-16">
-        <h2 className="text-4xl font-bold text-gray-900 mb-8">The Qarshain Advantage</h2>
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8">
-          <div className="space-y-8">
-          <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">For Borrowers</h3>
+        <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">The Qarshain Advantage</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-2xl p-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+                <User className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">For Borrowers</h3>
+            </div>
             <p className="text-gray-700 mb-4">
               Traditional banks often require extensive paperwork, long waiting periods, and rigid approval processes. 
               Qarshain eliminates these barriers by offering fast approval times, competitive interest rates, and 
@@ -220,8 +231,13 @@ export const BlogPost: React.FC = () => {
             </p>
           </div>
           
-          <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">For Lenders</h3>
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl p-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
+                <TrendingUp className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">For Lenders</h3>
+            </div>
             <p className="text-gray-700 mb-4">
               Qarshain provides an opportunity to earn higher returns than traditional savings accounts while 
               supporting the local economy. Our platform offers diversified investment options, allowing you to 
@@ -234,9 +250,15 @@ export const BlogPost: React.FC = () => {
               payments and principal repayments, making it a reliable source of passive income.
             </p>
           </div>
-          </div>
         </div>
       </section>
+
+      {/* Section Divider */}
+      <div className="flex items-center justify-center my-16">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div className="mx-8 w-3 h-3 bg-green-500 rounded-full"></div>
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+      </div>
 
       {/* Email Reminder System */}
       <section id="reminders" className="mb-16">
@@ -248,11 +270,11 @@ export const BlogPost: React.FC = () => {
           </p>
         </div>
 
-        <div className="space-y-8">
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <Clock className="h-4 w-4 text-green-600" />
+        <div className="space-y-12">
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                <Clock className="h-6 w-6 text-white" />
               </div>
               Upcoming Payment Reminders
             </h3>
@@ -264,10 +286,10 @@ export const BlogPost: React.FC = () => {
             </p>
             </div>
             
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-              <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                <AlertTriangle className="h-4 w-4 text-orange-600" />
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
+                <AlertTriangle className="h-6 w-6 text-white" />
               </div>
               Overdue Payment Warnings
             </h3>
@@ -279,10 +301,10 @@ export const BlogPost: React.FC = () => {
             </p>
             </div>
             
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                <Bell className="h-4 w-4 text-red-600" />
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
+                <Bell className="h-6 w-6 text-white" />
               </div>
               Final Notice and Escalation
             </h3>
@@ -296,31 +318,43 @@ export const BlogPost: React.FC = () => {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="flex items-center justify-center my-16">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div className="mx-8 w-3 h-3 bg-purple-500 rounded-full"></div>
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+      </div>
+
       {/* Conclusion */}
       <section id="conclusion" className="mb-16">
-        <h2 className="text-4xl font-bold text-gray-900 mb-8">The Future of Digital Lending in Saudi Arabia</h2>
-        <p className="text-lg text-gray-700 leading-relaxed mb-6">
-          As Saudi Arabia continues its digital transformation journey under Vision 2030, platforms like Qarshain represent 
-          the future of financial services. By combining traditional Islamic finance principles with modern technology, 
-          these platforms are making financial services more accessible, efficient, and transparent for all Saudis.
-        </p>
-        
-        <p className="text-lg text-gray-700 leading-relaxed mb-6">
-          The success of peer-to-peer lending platforms depends not just on technology, but on building trust, ensuring 
-          regulatory compliance, and creating value for all participants. Qarshain's approach to automated reminders, 
-          risk assessment, and user experience demonstrates how thoughtful design can address real market needs.
-        </p>
-        
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-8 mt-8">
-          <h3 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
-            <TrendingUp className="h-5 w-5" />
-            Looking Ahead
-          </h3>
-          <p className="text-blue-800 text-lg leading-relaxed">
-            The digital lending landscape in Saudi Arabia is still evolving, with new regulations and technologies 
-            emerging regularly. Platforms that can adapt to these changes while maintaining focus on user needs and 
-            regulatory compliance will likely shape the future of financial services in the region.
-          </p>
+        <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-3xl p-12">
+          <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">The Future of Digital Lending in Saudi Arabia</h2>
+          
+          <div className="prose prose-xl max-w-none text-center mb-8">
+            <p className="text-xl text-gray-700 leading-relaxed mb-6">
+              As Saudi Arabia continues its digital transformation journey under Vision 2030, platforms like Qarshain represent 
+              the future of financial services. By combining traditional Islamic finance principles with modern technology, 
+              these platforms are making financial services more accessible, efficient, and transparent for all Saudis.
+            </p>
+            
+            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              The success of peer-to-peer lending platforms depends not just on technology, but on building trust, ensuring 
+              regulatory compliance, and creating value for all participants. Qarshain's approach to automated reminders, 
+              risk assessment, and user experience demonstrates how thoughtful design can address real market needs.
+            </p>
+          </div>
+          
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold text-blue-900 mb-6 flex items-center justify-center gap-3">
+              <TrendingUp className="h-6 w-6" />
+              Looking Ahead
+            </h3>
+            <p className="text-blue-800 text-lg leading-relaxed text-center">
+              The digital lending landscape in Saudi Arabia is still evolving, with new regulations and technologies 
+              emerging regularly. Platforms that can adapt to these changes while maintaining focus on user needs and 
+              regulatory compliance will likely shape the future of financial services in the region.
+            </p>
+          </div>
         </div>
       </section>
 
