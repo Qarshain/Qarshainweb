@@ -22,51 +22,86 @@ import {
 
 export const BlogPost: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
-      {/* Article Header */}
-      <header className="mb-12">
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-6">
-            <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 px-3 py-1">
+    <div className="max-w-5xl mx-auto px-6 py-12">
+      {/* Article Hero Section */}
+      <header className="mb-16">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 px-4 py-2 text-sm font-medium">
               Fintech
             </Badge>
-            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 px-3 py-1">
+            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 px-4 py-2 text-sm font-medium">
               Digital Lending
             </Badge>
-            <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 px-3 py-1">
+            <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 px-4 py-2 text-sm font-medium">
               Saudi Arabia
             </Badge>
           </div>
           
-          <h1 className="text-5xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
+          <h1 className="text-6xl font-bold text-gray-900 mb-8 leading-tight tracking-tight max-w-4xl mx-auto">
             How Qarshain Works: Revolutionizing Digital Lending in Saudi Arabia
           </h1>
           
-          <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-3xl">
+          <p className="text-2xl text-gray-600 leading-relaxed mb-12 max-w-4xl mx-auto font-light">
             Discover how Qarshain is transforming the financial landscape in Saudi Arabia through innovative peer-to-peer lending technology, automated payment systems, and user-centric design.
           </p>
           
-          <div className="flex items-center gap-8 text-sm text-gray-500 mb-8">
+          <div className="flex items-center justify-center gap-12 text-sm text-gray-500 mb-8">
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
-              <span>December 15, 2024</span>
+              <Calendar className="h-5 w-5" />
+              <span className="font-medium">December 15, 2024</span>
             </div>
             <div className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              <span>Qarshain Editorial Team</span>
+              <User className="h-5 w-5" />
+              <span className="font-medium">Qarshain Editorial Team</span>
             </div>
             <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span>8 min read</span>
+              <Clock className="h-5 w-5" />
+              <span className="font-medium">8 min read</span>
             </div>
+          </div>
+        </div>
+        
+        {/* Featured Image Placeholder */}
+        <div className="w-full h-96 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl mb-12 flex items-center justify-center border border-gray-200">
+          <div className="text-center">
+            <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <TrendingUp className="h-12 w-12 text-blue-600" />
+            </div>
+            <p className="text-gray-600 font-medium">Featured Image: Digital Lending Platform</p>
           </div>
         </div>
       </header>
 
+      {/* Table of Contents */}
+      <div className="bg-gray-50 border border-gray-200 rounded-xl p-8 mb-16">
+        <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+          <Tag className="h-5 w-5" />
+          Table of Contents
+        </h3>
+        <nav className="space-y-3">
+          <a href="#introduction" className="block text-gray-700 hover:text-blue-600 transition-colors">
+            <span className="font-medium">1.</span> Introduction
+          </a>
+          <a href="#how-it-works" className="block text-gray-700 hover:text-blue-600 transition-colors">
+            <span className="font-medium">2.</span> How the Platform Works
+          </a>
+          <a href="#advantage" className="block text-gray-700 hover:text-blue-600 transition-colors">
+            <span className="font-medium">3.</span> The Qarshain Advantage
+          </a>
+          <a href="#reminders" className="block text-gray-700 hover:text-blue-600 transition-colors">
+            <span className="font-medium">4.</span> Automated Payment Reminders
+          </a>
+          <a href="#conclusion" className="block text-gray-700 hover:text-blue-600 transition-colors">
+            <span className="font-medium">5.</span> The Future of Digital Lending
+          </a>
+        </nav>
+      </div>
+
       {/* Article Introduction */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
-        <div className="prose prose-lg max-w-none">
+      <section id="introduction" className="mb-16">
+        <h2 className="text-4xl font-bold text-gray-900 mb-8">Introduction</h2>
+        <div className="prose prose-xl max-w-none">
         <p className="text-lg text-gray-700 leading-relaxed mb-6">
           The financial landscape in Saudi Arabia is undergoing a significant transformation. Traditional banking institutions, 
           while reliable, often struggle to meet the evolving needs of modern borrowers and investors. Long approval processes, 
@@ -97,8 +132,8 @@ export const BlogPost: React.FC = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">How the Platform Works</h2>
+      <section id="how-it-works" className="mb-16">
+        <h2 className="text-4xl font-bold text-gray-900 mb-8">How the Platform Works</h2>
         
         <div className="prose prose-lg max-w-none">
           <p className="text-lg text-gray-700 leading-relaxed mb-8">
@@ -166,8 +201,8 @@ export const BlogPost: React.FC = () => {
       </section>
 
       {/* The Qarshain Advantage */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">The Qarshain Advantage</h2>
+      <section id="advantage" className="mb-16">
+        <h2 className="text-4xl font-bold text-gray-900 mb-8">The Qarshain Advantage</h2>
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8">
           <div className="space-y-8">
           <div>
@@ -204,8 +239,8 @@ export const BlogPost: React.FC = () => {
       </section>
 
       {/* Email Reminder System */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Automated Payment Reminders</h2>
+      <section id="reminders" className="mb-16">
+        <h2 className="text-4xl font-bold text-gray-900 mb-8">Automated Payment Reminders</h2>
         
         <div className="prose prose-lg max-w-none">
           <p className="text-lg text-gray-700 leading-relaxed mb-8">
@@ -262,8 +297,8 @@ export const BlogPost: React.FC = () => {
       </section>
 
       {/* Conclusion */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">The Future of Digital Lending in Saudi Arabia</h2>
+      <section id="conclusion" className="mb-16">
+        <h2 className="text-4xl font-bold text-gray-900 mb-8">The Future of Digital Lending in Saudi Arabia</h2>
         <p className="text-lg text-gray-700 leading-relaxed mb-6">
           As Saudi Arabia continues its digital transformation journey under Vision 2030, platforms like Qarshain represent 
           the future of financial services. By combining traditional Islamic finance principles with modern technology, 
@@ -289,17 +324,33 @@ export const BlogPost: React.FC = () => {
         </div>
       </section>
 
+      {/* Author Bio */}
+      <div className="bg-gray-50 border border-gray-200 rounded-xl p-8 mb-12">
+        <div className="flex items-start gap-6">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
+            <User className="h-10 w-10 text-white" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Qarshain Editorial Team</h3>
+            <p className="text-gray-600 mb-4">
+              Our editorial team consists of financial experts, technology specialists, and market analysts dedicated to providing accurate, 
+              insightful content about the evolving landscape of digital finance in Saudi Arabia.
+            </p>
+            <div className="flex items-center gap-4 text-sm text-gray-500">
+              <span>Published December 15, 2024</span>
+              <span>•</span>
+              <span>8 min read</span>
+              <span>•</span>
+              <span>Updated 2 days ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Article Footer */}
       <footer className="border-t border-gray-200 pt-12 mt-16">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
           <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-4 text-sm text-gray-600">
-              <span>Published December 15, 2024</span>
-            <span>•</span>
-            <span>Qarshain Editorial Team</span>
-              <span>•</span>
-              <span>8 min read</span>
-            </div>
             <div className="flex items-center gap-3 mt-2">
               <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
                 Fintech
@@ -320,6 +371,48 @@ export const BlogPost: React.FC = () => {
             <Button variant="outline" size="sm" className="flex items-center gap-2" asChild>
               <Link to="/blog-ar">العربية</Link>
             </Button>
+          </div>
+        </div>
+        
+        {/* Related Articles */}
+        <div className="mt-12">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="flex items-start gap-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-50 to-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="h-8 w-8 text-green-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Understanding P2P Lending Risks</h4>
+                  <p className="text-gray-600 text-sm mb-3">Learn about risk management strategies for peer-to-peer lending platforms.</p>
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <Calendar className="h-3 w-3" />
+                    <span>Dec 10, 2024</span>
+                    <span>•</span>
+                    <span>5 min read</span>
+                  </div>
+                </div>
+              </div>
+            </Card>
+            
+            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="flex items-start gap-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Shield className="h-8 w-8 text-blue-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Saudi Fintech Regulations 2024</h4>
+                  <p className="text-gray-600 text-sm mb-3">A comprehensive guide to the latest regulatory changes in Saudi fintech.</p>
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <Calendar className="h-3 w-3" />
+                    <span>Dec 8, 2024</span>
+                    <span>•</span>
+                    <span>7 min read</span>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
         
