@@ -123,6 +123,20 @@ const Header = () => {
               <Users className="h-4 w-4" />
               <span>{t('nav.contact')}</span>
             </a>
+            
+            <a 
+              href="/blog" 
+              className={`px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 ${
+                isRtl ? 'space-x-reverse' : ''
+              } ${
+                location.pathname === '/blog' 
+                  ? 'bg-primary/10 text-primary border border-primary/20' 
+                  : 'text-foreground hover:text-primary hover:bg-primary/5'
+              }`}
+            >
+              <FileText className="h-4 w-4" />
+              <span>{isRtl ? 'المدونة' : 'Blog'}</span>
+            </a>
           </div>
         </nav>
         
