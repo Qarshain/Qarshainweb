@@ -375,7 +375,7 @@ const AdminLoanReview: React.FC<AdminLoanReviewProps> = ({
                             </span>
                             <Badge variant="outline">
                               {Math.round(match.matchScore * 100)}% match
-                            </span>
+                            </Badge>
                           </div>
                           <div className="grid grid-cols-3 gap-2 text-sm text-muted-foreground">
                             <div>Amount: {formatSAR(match.amount)}</div>

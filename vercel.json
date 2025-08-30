@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "nodeVersion": "18.x",
+  "env": {
+    "VITE_GA_MEASUREMENT_ID": "@vite_ga_measurement_id",
+    "VITE_ENABLE_GA": "@vite_enable_ga",
+    "VITE_ENABLE_CLARITY": "@vite_enable_clarity"
+  }
+}
