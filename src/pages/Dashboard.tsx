@@ -29,6 +29,7 @@ import {
   AlertCircle,
   User
 } from "lucide-react";
+import { BorrowerPaymentReminders } from "@/components/BorrowerPaymentReminders";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -452,6 +453,13 @@ const Dashboard = () => {
                 )}
               </CardContent>
             </Card>
+          </div>
+        )}
+
+        {/* Payment Reminders Section - Only for Borrowers */}
+        {userType === 'borrower' && user && (
+          <div className="mb-8">
+            <BorrowerPaymentReminders userId={user.uid} language={language} />
           </div>
         )}
 
