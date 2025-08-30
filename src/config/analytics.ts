@@ -11,6 +11,23 @@ export const ANALYTICS_CONFIG = {
   ENABLE_GOOGLE_ANALYTICS: import.meta.env.VITE_ENABLE_GA !== 'false',
   ENABLE_CLARITY: import.meta.env.VITE_ENABLE_CLARITY !== 'false',
   
+  // Consent mode configuration
+  CONSENT_MODE: {
+    // Default consent state (before user makes choice)
+    DEFAULT_CONSENT: {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted', // Always granted for security
+    },
+    
+    // Consent mode update delay (ms)
+    UPDATE_DELAY: 500,
+  },
+  
   // Debug mode
   DEBUG: import.meta.env.DEV || false,
 };

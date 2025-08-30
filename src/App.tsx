@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import Dashboard from "./pages/Dashboard";
 import InvestList from "./pages/InvestList";
@@ -18,7 +17,10 @@ import LoanRequest from "./pages/LoanRequest";
 import Wallet from "./pages/Wallet";
 import Transactions from "./pages/Transactions";
 import UserProfile from "./components/UserProfile";
+import EmailTest from "./pages/EmailTest";
 import { useAnalytics } from "./hooks/useAnalytics";
+import { ConsentBanner } from "./components/ConsentBanner";
+import { GoogleAnalytics } from "./components/GoogleAnalytics";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +49,7 @@ function AppRoutes() {
       <Route path="/invest/:id" element={<InvestDetail />} />
       <Route path="/admin/opportunities" element={<AdminOpportunities />} />
       <Route path="/loan-request" element={<LoanRequest />} />
+      <Route path="/email-test" element={<PrivateRoute><EmailTest /></PrivateRoute>} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>
@@ -59,11 +62,11 @@ const App = () => (
       <Toaster />
       <Sonner />
       <AuthProvider>
-        <LanguageProvider>
-          <NotificationProvider>
-            <AppRoutes />
-          </NotificationProvider>
-        </LanguageProvider>
+        <NotificationProvider>
+          <AppRoutes />
+          <ConsentBanner />
+          <GoogleAnalytics />
+        </NotificationProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>

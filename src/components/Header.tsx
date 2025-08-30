@@ -208,18 +208,33 @@ const Header = () => {
                         
                         {/* Admin Dashboard Link */}
                         {user?.email === "saharaldhaheri@gmail.com" && (
-                          <Button 
-                            variant="ghost" 
-                            onClick={() => handleNavigation('/admin/opportunities')}
-                            className={`w-full justify-start px-4 py-2 rounded-none hover:bg-gray-50 ${
-                              isActiveRoute('/admin/opportunities') 
-                                ? 'bg-red-50 text-red-600 border-r-2 border-red-500' 
-                                : 'text-gray-700 hover:text-red-600'
-                            }`}
-                          >
-                            <Settings className="h-4 w-4 mr-3" />
-                            {isRtl ? 'الإدارة' : 'Admin'}
-                          </Button>
+                          <>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => handleNavigation('/admin/opportunities')}
+                              className={`w-full justify-start px-4 py-2 rounded-none hover:bg-gray-50 ${
+                                isActiveRoute('/admin/opportunities') 
+                                  ? 'bg-red-50 text-red-600 border-r-2 border-red-500' 
+                                  : 'text-gray-700 hover:text-red-600'
+                              }`}
+                            >
+                              <Settings className="h-4 w-4 mr-3" />
+                              {isRtl ? 'الإدارة' : 'Admin'}
+                            </Button>
+                            
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => handleNavigation('/email-test')}
+                              className={`w-full justify-start px-4 py-2 rounded-none hover:bg-gray-50 ${
+                                isActiveRoute('/email-test') 
+                                  ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-500' 
+                                  : 'text-gray-700 hover:text-blue-600'
+                              }`}
+                            >
+                              <FileText className="h-4 w-4 mr-3" />
+                              {isRtl ? 'اختبار البريد' : 'Email Test'}
+                            </Button>
+                          </>
                         )}
                         
                         <div className="border-t border-gray-200 my-1"></div>
@@ -344,18 +359,33 @@ const Header = () => {
               
               {/* Admin Dashboard Link */}
               {user?.email === "saharaldhaheri@gmail.com" && (
-                <Button 
-                  variant="ghost" 
-                  onClick={() => handleNavigation('/admin/opportunities')}
-                  className={`justify-start px-4 py-3 rounded-lg transition-all duration-200 ${
-                    isActiveRoute('/admin/opportunities') 
-                      ? 'bg-red-50 text-red-600 border border-red-200' 
-                      : 'hover:bg-red-50 hover:text-red-600'
-                  }`}
-                >
-                  <Settings className="h-4 w-4 mr-3" />
-                  {isRtl ? 'الإدارة' : 'Admin'}
-                </Button>
+                <>
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => handleNavigation('/admin/opportunities')}
+                    className={`justify-start px-4 py-3 rounded-lg transition-all duration-200 ${
+                      isActiveRoute('/admin/opportunities') 
+                        ? 'bg-red-50 text-red-600 border border-red-200' 
+                        : 'hover:bg-red-50 hover:text-red-600'
+                    }`}
+                  >
+                    <Settings className="h-4 w-4 mr-3" />
+                    {isRtl ? 'الإدارة' : 'Admin'}
+                  </Button>
+                  
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => handleNavigation('/email-test')}
+                    className={`justify-start px-4 py-3 rounded-lg transition-all duration-200 ${
+                      isActiveRoute('/email-test') 
+                        ? 'bg-blue-50 text-blue-600 border border-blue-200' 
+                        : 'hover:bg-blue-50 hover:text-blue-600'
+                    }`}
+                  >
+                    <FileText className="h-4 w-4 mr-3" />
+                    {isRtl ? 'اختبار البريد' : 'Email Test'}
+                  </Button>
+                </>
               )}
               
               <Button 

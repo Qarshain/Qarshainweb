@@ -1,5 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PrivacySettings } from "./PrivacySettings";
 
 const Footer = () => {
   const { language, t } = useLanguage();
@@ -62,6 +63,7 @@ const Footer = () => {
             <a href="#" className="hover:text-gold-light transition-colors">{t('footer.terms')}</a>
             <a href="#" className="hover:text-gold-light transition-colors">{t('footer.privacyPolicy')}</a>
             <a href="#" className="hover:text-gold-light transition-colors">{t('footer.cookies')}</a>
+            <PrivacySettings />
           </div>
         </div>
       </div>
