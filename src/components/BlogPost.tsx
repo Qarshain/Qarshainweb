@@ -22,9 +22,6 @@ import {
 export const BlogPost: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-        <strong>Debug:</strong> BlogPost component is rendering!
-      </div>
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-4">
